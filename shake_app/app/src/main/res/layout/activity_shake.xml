@@ -50,7 +50,9 @@
                     />
             </RelativeLayout>
         </LinearLayout>
+
     </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/shake_title_bar"
@@ -85,7 +87,6 @@
             android:onClick="linshi"
             />
     </RelativeLayout>
-
 
     <SlidingDrawer
         android:id="@+id/slidingDrawer1"

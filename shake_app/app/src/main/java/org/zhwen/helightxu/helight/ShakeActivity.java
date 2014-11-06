@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
@@ -26,9 +28,12 @@ public class ShakeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
         setContentView(R.layout.activity_shake);
-        mVibrator = (Vibrator)getApplication().getSystemService(VIBRATOR_SERVICE);
 
+        mVibrator = (Vibrator)getApplication().getSystemService(VIBRATOR_SERVICE);
         mImgUp = (RelativeLayout) findViewById(R.id.shakeImgUp);
         mImgDn = (RelativeLayout) findViewById(R.id.shakeImgDown);
         mTitle = (RelativeLayout) findViewById(R.id.shake_title_bar);
