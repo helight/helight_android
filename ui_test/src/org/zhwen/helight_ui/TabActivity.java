@@ -175,13 +175,11 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
 				Builder builder = new Builder(TabActivity.this);
 				builder.setTitle("提示");
 				builder.setMessage("你确定要退出吗？");
-				builder.setIcon(R.drawable.ic_launcher);
+				builder.setIcon(R.drawable.zhwen);
 
 				DialogInterface.OnClickListener dialog = new DialogInterface.OnClickListener() {
-
 					@Override
 					public void onClick(DialogInterface arg0, int arg1) {
-						// TODO Auto-generated method stub
 						if (arg1 == DialogInterface.BUTTON_POSITIVE) {
 							arg0.cancel();
 						} else if (arg1 == DialogInterface.BUTTON_NEGATIVE) {
