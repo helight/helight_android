@@ -14,9 +14,9 @@ public class StartActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE); //隐藏标题
+        requestWindowFeature(Window.FEATURE_NO_TITLE); //闅愯棌鏍囬
         // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-        //         WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
+        //         WindowManager.LayoutParams.FLAG_FULLSCREEN);//璁剧疆鍏ㄥ睆
 
         setContentView(R.layout.activity_start);
         

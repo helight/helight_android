@@ -7,14 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import org.zhwen.helight_ui.R;
 
-public class ContactsFragment extends Fragment {  
+public class MineFragment extends Fragment {  
   
     @Override  
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  
             Bundle savedInstanceState) {  
-        View contactsLayout = inflater.inflate(R.layout.contacts_layout,  
+        View mineLayout = inflater.inflate(R.layout.mine_layout,  
                 container, false);  
-        return contactsLayout;  
+        return mineLayout;  
     }  
   
 }  

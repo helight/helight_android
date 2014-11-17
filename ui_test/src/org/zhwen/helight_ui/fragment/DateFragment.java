@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 import org.zhwen.helight_ui.R;
 
 
-public class MessageFragment extends Fragment {  
+public class DateFragment extends Fragment {  
   
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  
             Bundle savedInstanceState) {  
-        View messageLayout = inflater.inflate(R.layout.message_layout, container, false);  
-        return messageLayout;  
+        View dateLayout = inflater.inflate(R.layout.date_layout, container, false);  
+        return dateLayout;  
     }  
   
 }  

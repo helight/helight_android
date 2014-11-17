@@ -2,11 +2,6 @@
         android:layout_width="match_parent"  
         android:layout_height="match_parent"  
         android:orientation="vertical" >  
-        <LinearLayout  
-            android:id="@+id/main_layout"
-			android:layout_width="match_parent"  
-        	android:layout_height="match_parent"  
-       		android:orientation="vertical" >
 	    <!-- ViewPager的使用必须是完整的名字哦 -->
 	    <android.support.v4.view.ViewPager
 	        android:id="@+id/viewpager"
@@ -18,64 +13,6 @@
             android:layout_width="match_parent"  
             android:layout_height="60dp"  
             android:background="@drawable/tab_bg" >  
-      
-            <RelativeLayout  
-                android:id="@+id/message_layout"  
-                android:layout_width="0dp"  
-                android:layout_height="match_parent"  
-                android:layout_weight="1" >  
-      
-                <LinearLayout  
-                    android:layout_width="match_parent"  
-                    android:layout_height="wrap_content"  
-                    android:layout_centerVertical="true"  
-                    android:orientation="vertical" >  
-      
-                    <ImageView  
-                        android:id="@+id/message_image"  
-                        android:layout_width="wrap_content"  
-                        android:layout_height="wrap_content"  
-                        android:layout_gravity="center_horizontal"  
-                        android:src="@drawable/message_unselected" />  
-      
-                    <TextView  
-                        android:id="@+id/message_text"  
-                        android:layout_width="wrap_content"  
-                        android:layout_height="wrap_content"  
-                        android:layout_gravity="center_horizontal"  
-                        android:text="搜索"  
-                        android:textColor="#82858b" />  
-                </LinearLayout>  
-            </RelativeLayout>  
-      
-            <RelativeLayout  
-                android:id="@+id/contacts_layout"  
-                android:layout_width="0dp"  
-                android:layout_height="match_parent"  
-                android:layout_weight="1" >  
-      
-                <LinearLayout  
-                    android:layout_width="match_parent"  
-                    android:layout_height="wrap_content"  
-                    android:layout_centerVertical="true"  
-                    android:orientation="vertical" >  
-      
-                    <ImageView  
-                        android:id="@+id/contacts_image"  
-                        android:layout_width="wrap_content"  
-                        android:layout_height="wrap_content"  
-                        android:layout_gravity="center_horizontal"  
-                        android:src="@drawable/contacts_unselected" />  
-      
-                    <TextView  
-                        android:id="@+id/contacts_text"  
-                        android:layout_width="wrap_content"  
-                        android:layout_height="wrap_content"  
-                        android:layout_gravity="center_horizontal"  
-                        android:text="联系人"  
-                        android:textColor="#82858b" />  
-                </LinearLayout>  
-            </RelativeLayout>  
       
             <RelativeLayout  
                 android:id="@+id/news_layout"  
@@ -94,18 +31,105 @@
                         android:layout_width="wrap_content"  
                         android:layout_height="wrap_content"  
                         android:layout_gravity="center_horizontal"  
-                        android:src="@drawable/news_unselected" />  
+                        android:src="@drawable/message_unselected" />  
       
                     <TextView  
                         android:id="@+id/news_text"  
                         android:layout_width="wrap_content"  
                         android:layout_height="wrap_content"  
                         android:layout_gravity="center_horizontal"  
-                        android:text="动态"  
+                        android:text="球讯"  
                         android:textColor="#82858b" />  
                 </LinearLayout>  
             </RelativeLayout>  
+            
+            <RelativeLayout  
+                android:id="@+id/show_layout"  
+                android:layout_width="0dp"  
+                android:layout_height="match_parent"  
+                android:layout_weight="1" >  
       
+                <LinearLayout  
+                    android:layout_width="match_parent"  
+                    android:layout_height="wrap_content"  
+                    android:layout_centerVertical="true"  
+                    android:orientation="vertical" >  
+      
+                    <ImageView  
+                        android:id="@+id/show_image"  
+                        android:layout_width="wrap_content"  
+                        android:layout_height="wrap_content"  
+                        android:layout_gravity="center_horizontal"  
+                        android:src="@drawable/contacts_unselected" />  
+      
+                    <TextView  
+                        android:id="@+id/show_text"  
+                        android:layout_width="wrap_content"  
+                        android:layout_height="wrap_content"  
+                        android:layout_gravity="center_horizontal"  
+                        android:text="球秀"  
+                        android:textColor="#82858b" />  
+                </LinearLayout>  
+            </RelativeLayout>  
+            <RelativeLayout  
+                android:id="@+id/date_layout"  
+                android:layout_width="0dp"  
+                android:layout_height="match_parent"  
+                android:layout_weight="1" >  
+      
+                <LinearLayout  
+                    android:layout_width="match_parent"  
+                    android:layout_height="wrap_content"  
+                    android:layout_centerVertical="true"  
+                    android:orientation="vertical" >  
+      
+                    <ImageView  
+                        android:id="@+id/date_image"  
+                        android:layout_width="wrap_content"  
+                        android:layout_height="wrap_content"  
+                        android:layout_gravity="center_horizontal"  
+                        android:src="@drawable/news_unselected" />  
+      
+                    <TextView  
+                        android:id="@+id/date_text"  
+                        android:layout_width="wrap_content"  
+                        android:layout_height="wrap_content"  
+                        android:layout_gravity="center_horizontal"  
+                        android:text="约球"  
+                        android:textColor="#82858b" />  
+                </LinearLayout>  
+            </RelativeLayout>  
+            
+            <RelativeLayout  
+                android:id="@+id/mine_layout"  
+                android:layout_width="0dp"  
+                android:layout_height="match_parent"  
+                android:layout_weight="1" >  
+      
+                <LinearLayout  
+                    android:layout_width="match_parent"  
+                    android:layout_height="wrap_content"  
+                    android:layout_centerVertical="true"  
+                    android:orientation="vertical" >  
+      
+                    <ImageView  
+                        android:id="@+id/mine_image"  
+                        android:layout_width="wrap_content"  
+                        android:layout_height="wrap_content"  
+                        android:layout_gravity="center_horizontal"  
+                        android:src="@drawable/contacts_unselected" />  
+      
+                    <TextView  
+                        android:id="@+id/mine_text"  
+                        android:layout_width="wrap_content"  
+                        android:layout_height="wrap_content"  
+                        android:layout_gravity="center_horizontal"  
+                        android:text="我"  
+                        android:textColor="#82858b" />  
+                </LinearLayout>  
+            </RelativeLayout>  
+
+            
             <RelativeLayout  
                 android:id="@+id/setting_layout"  
                 android:layout_width="0dp"  
@@ -135,5 +159,4 @@
                 </LinearLayout>  
             </RelativeLayout>  
         </LinearLayout>  
-		</LinearLayout>  
     </LinearLayout>  

@@ -4,9 +4,10 @@ package org.zhwen.helight_ui;
 
 import java.util.ArrayList;
 
-import org.zhwen.helight_ui.fragment.ContactsFragment;
-import org.zhwen.helight_ui.fragment.MessageFragment;
+import org.zhwen.helight_ui.fragment.DateFragment;
+import org.zhwen.helight_ui.fragment.MineFragment;
 import org.zhwen.helight_ui.fragment.NewsFragment;
+import org.zhwen.helight_ui.fragment.ShowFragment;
 import org.zhwen.helight_ui.fragment.SettingFragment;
 
 import android.app.AlertDialog;
@@ -27,27 +28,31 @@ import android.graphics.Color;
 
 
 /** 
- * ÏîÄ¿µÄÖ÷Activity£¬ËùÓĞµÄFragment¶¼Ç¶ÈëÔÚÕâÀï¡£ 
+ * é¡¹ç›®çš„ä¸»Activityï¼Œæ‰€æœ‰çš„Fragmentéƒ½åµŒå…¥åœ¨è¿™é‡Œã€‚ 
  *  
  */  
 public class TabActivity extends FragmentActivity implements OnClickListener {  
 
 	private ViewPager mPager;
 
-    private View messageLayout;    // ÏûÏ¢½çÃæ²¼¾Ö 
-    private View contactsLayout;   // ÁªÏµÈË½çÃæ²¼¾Ö 
-    private View newsLayout;       // ¶¯Ì¬½çÃæ²¼¾Ö 
-    private View settingLayout;    // ÉèÖÃ½çÃæ²¼¾Ö 
+    private View newsLayout;    // æ¶ˆæ¯ç•Œé¢å¸ƒå±€ 
+    private View showLayout;   // è”ç³»äººç•Œé¢å¸ƒå±€ 
+    private View dateLayout;       // åŠ¨æ€ç•Œé¢å¸ƒå±€ 
+    private View mineLayout;
+    private View settingLayout;    // è®¾ç½®ç•Œé¢å¸ƒå±€ 
+  
     
-    private ImageView messageImage;  // ÔÚTab²¼¾ÖÉÏÏÔÊ¾ÏûÏ¢Í¼±êµÄ¿Ø¼ş 
-    private ImageView contactsImage; // ÔÚTab²¼¾ÖÉÏÏÔÊ¾ÁªÏµÈËÍ¼±êµÄ¿Ø¼ş 
-    private ImageView newsImage;     // ÔÚTab²¼¾ÖÉÏÏÔÊ¾¶¯Ì¬Í¼±êµÄ¿Ø¼ş 
-    private ImageView settingImage;  // ÔÚTab²¼¾ÖÉÏÏÔÊ¾ÉèÖÃÍ¼±êµÄ¿Ø¼ş 
+    private ImageView newsImage;  // åœ¨Tabå¸ƒå±€ä¸Šæ˜¾ç¤ºæ¶ˆæ¯å›¾æ ‡çš„æ§ä»¶ 
+    private ImageView showImage; // åœ¨Tabå¸ƒå±€ä¸Šæ˜¾ç¤ºè”ç³»äººå›¾æ ‡çš„æ§ä»¶ 
+    private ImageView dateImage;     // åœ¨Tabå¸ƒå±€ä¸Šæ˜¾ç¤ºåŠ¨æ€å›¾æ ‡çš„æ§ä»¶ 
+    private ImageView mineImage;
+    private ImageView settingImage;  // åœ¨Tabå¸ƒå±€ä¸Šæ˜¾ç¤ºè®¾ç½®å›¾æ ‡çš„æ§ä»¶ 
     
-    private TextView messageText;   // ÔÚTab²¼¾ÖÉÏÏÔÊ¾ÏûÏ¢±êÌâµÄ¿Ø¼ş 
-    private TextView contactsText;  // ÔÚTab²¼¾ÖÉÏÏÔÊ¾ÁªÏµÈË±êÌâµÄ¿Ø¼ş 
-    private TextView newsText;      // ÔÚTab²¼¾ÖÉÏÏÔÊ¾¶¯Ì¬±êÌâµÄ¿Ø¼ş 
-    private TextView settingText;   // ÔÚTab²¼¾ÖÉÏÏÔÊ¾ÉèÖÃ±êÌâµÄ¿Ø¼ş 
+    private TextView newsText;   // åœ¨Tabå¸ƒå±€ä¸Šæ˜¾ç¤ºæ¶ˆæ¯æ ‡é¢˜çš„æ§ä»¶ 
+    private TextView showText;  // åœ¨Tabå¸ƒå±€ä¸Šæ˜¾ç¤ºè”ç³»äººæ ‡é¢˜çš„æ§ä»¶ 
+    private TextView dateText;      // åœ¨Tabå¸ƒå±€ä¸Šæ˜¾ç¤ºåŠ¨æ€æ ‡é¢˜çš„æ§ä»¶ 
+    private TextView mineText;
+    private TextView settingText;   // åœ¨Tabå¸ƒå±€ä¸Šæ˜¾ç¤ºè®¾ç½®æ ‡é¢˜çš„æ§ä»¶ 
     
     private int tab_index = 0;
     
@@ -59,55 +64,65 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
         mPager = (ViewPager) findViewById(R.id.viewpager);
 		
 		ArrayList<Fragment> fragmentArray = new ArrayList<Fragment>();
-		fragmentArray.add(new MessageFragment());
-		fragmentArray.add(new ContactsFragment());
 		fragmentArray.add(new NewsFragment());
+		fragmentArray.add(new ShowFragment());
+		fragmentArray.add(new DateFragment());
+		fragmentArray.add(new MineFragment());
 		fragmentArray.add(new SettingFragment());
 		mPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), fragmentArray));		
 		mPager.setOnPageChangeListener(new MyOnPageChangeListener());		
         
-		initViews();  // ³õÊ¼»¯²¼¾ÖÔªËØ   
+		initViews();  // åˆå§‹åŒ–å¸ƒå±€å…ƒç´    
 		
-		setTabSelection(0);
+		setTabSelection(2);
     }  
   
     /** 
-     * ÔÚÕâÀï»ñÈ¡µ½Ã¿¸öĞèÒªÓÃµ½µÄ¿Ø¼şµÄÊµÀı£¬²¢¸øËüÃÇÉèÖÃºÃ±ØÒªµÄµã»÷ÊÂ¼ş¡£ 
+     * åœ¨è¿™é‡Œè·å–åˆ°æ¯ä¸ªéœ€è¦ç”¨åˆ°çš„æ§ä»¶çš„å®ä¾‹ï¼Œå¹¶ç»™å®ƒä»¬è®¾ç½®å¥½å¿…è¦çš„ç‚¹å‡»äº‹ä»¶ã€‚ 
      */  
     private void initViews() {  
-        messageLayout = findViewById(R.id.message_layout);  
-        contactsLayout = findViewById(R.id.contacts_layout);  
         newsLayout = findViewById(R.id.news_layout);  
-        settingLayout = findViewById(R.id.setting_layout);  
-        messageImage = (ImageView) findViewById(R.id.message_image);  
-        contactsImage = (ImageView) findViewById(R.id.contacts_image);  
+        showLayout = findViewById(R.id.show_layout);  
+        dateLayout = findViewById(R.id.date_layout);  
+        mineLayout = findViewById(R.id.mine_layout);
+        settingLayout = findViewById(R.id.setting_layout); 
+        
         newsImage = (ImageView) findViewById(R.id.news_image);  
+        showImage = (ImageView) findViewById(R.id.show_image);  
+        dateImage = (ImageView) findViewById(R.id.date_image);  
+        mineImage = (ImageView) findViewById(R.id.mine_image);  
         settingImage = (ImageView) findViewById(R.id.setting_image);  
-        messageText = (TextView) findViewById(R.id.message_text);  
-        contactsText = (TextView) findViewById(R.id.contacts_text);  
+        
         newsText = (TextView) findViewById(R.id.news_text);  
+        showText = (TextView) findViewById(R.id.show_text);  
+        dateText = (TextView) findViewById(R.id.date_text);  
+        mineText = (TextView) findViewById(R.id.mine_text);  
         settingText = (TextView) findViewById(R.id.setting_text);  
         
-        messageLayout.setOnClickListener(this);  
-        contactsLayout.setOnClickListener(this);  
         newsLayout.setOnClickListener(this);  
+        showLayout.setOnClickListener(this);  
+        dateLayout.setOnClickListener(this);  
+        mineLayout.setOnClickListener(this);  
         settingLayout.setOnClickListener(this);  
     }  
   
     @Override  
     public void onClick(View v) {  
         switch (v.getId()) {  
-        case R.id.message_layout:               
-        	tab_index = 0;// µ±µã»÷ÁËÏûÏ¢tabÊ±£¬Ñ¡ÖĞµÚ1¸ötab 
+        case R.id.news_layout:               
+        	tab_index = 0;// å½“ç‚¹å‡»äº†æ¶ˆæ¯tabæ—¶ï¼Œé€‰ä¸­ç¬¬1ä¸ªtab 
             break;  
-        case R.id.contacts_layout:                
-        	tab_index = 1;// µ±µã»÷ÁËÁªÏµÈËtabÊ±£¬Ñ¡ÖĞµÚ2¸ötab
+        case R.id.show_layout:                
+        	tab_index = 1;// å½“ç‚¹å‡»äº†è”ç³»äººtabæ—¶ï¼Œé€‰ä¸­ç¬¬2ä¸ªtab
             break;  
-        case R.id.news_layout:              
-        	tab_index = 2;// µ±µã»÷ÁË¶¯Ì¬tabÊ±£¬Ñ¡ÖĞµÚ3¸ötab
+        case R.id.date_layout:                
+        	tab_index = 2;// å½“ç‚¹å‡»äº†è”ç³»äººtabæ—¶ï¼Œé€‰ä¸­ç¬¬2ä¸ªtab
+            break;  
+        case R.id.mine_layout:              
+        	tab_index = 3;// å½“ç‚¹å‡»äº†åŠ¨æ€tabæ—¶ï¼Œé€‰ä¸­ç¬¬3ä¸ªtab
             break;  
         case R.id.setting_layout:               
-        	tab_index = 3;// µ±µã»÷ÁËÉèÖÃtabÊ±£¬Ñ¡ÖĞµÚ4¸ötab  
+        	tab_index = 4;// å½“ç‚¹å‡»äº†è®¾ç½®tabæ—¶ï¼Œé€‰ä¸­ç¬¬4ä¸ªtab  
             break;  
         default:  
             break;  
@@ -116,35 +131,41 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
     }     
   
     /** 
-     * ¸ù¾İ´«ÈëµÄindex²ÎÊıÀ´ÉèÖÃÑ¡ÖĞµÄtabÒ³¡£ 
+     * æ ¹æ®ä¼ å…¥çš„indexå‚æ•°æ¥è®¾ç½®é€‰ä¸­çš„tabé¡µã€‚ 
      *  
-     * @param index  Ã¿¸ötabÒ³¶ÔÓ¦µÄÏÂ±ê¡£0±íÊ¾ÏûÏ¢£¬1±íÊ¾ÁªÏµÈË£¬2±íÊ¾¶¯Ì¬£¬3±íÊ¾ÉèÖÃ¡£ 
+     * @param index  æ¯ä¸ªtabé¡µå¯¹åº”çš„ä¸‹æ ‡ã€‚0è¡¨ç¤ºæ¶ˆæ¯ï¼Œ1è¡¨ç¤ºè”ç³»äººï¼Œ2è¡¨ç¤ºåŠ¨æ€ï¼Œ3è¡¨ç¤ºè®¾ç½®ã€‚ 
      */  
     private void setTabSelection(int index) {  
     	clearSelection();
         switch (index) {  
         case 0:  
-            // µ±µã»÷ÁËÏûÏ¢tabÊ±£¬¸Ä±ä¿Ø¼şµÄÍ¼Æ¬ºÍÎÄ×ÖÑÕÉ«  
+            // å½“ç‚¹å‡»äº†æ¶ˆæ¯tabæ—¶ï¼Œæ”¹å˜æ§ä»¶çš„å›¾ç‰‡å’Œæ–‡å­—é¢œè‰²  
         	mPager.setCurrentItem(0);
-            messageImage.setImageResource(R.drawable.message_selected);  
-            messageText.setTextColor(Color.WHITE);              
-            break;  
-        case 1:  
-            // µ±µã»÷ÁËÁªÏµÈËtabÊ±£¬¸Ä±ä¿Ø¼şµÄÍ¼Æ¬ºÍÎÄ×ÖÑÕÉ«
-        	mPager.setCurrentItem(1);
-            contactsImage.setImageResource(R.drawable.contacts_selected);  
-            contactsText.setTextColor(Color.WHITE);              
-            break;  
-        case 2:  
-            // µ±µã»÷ÁË¶¯Ì¬tabÊ±£¬¸Ä±ä¿Ø¼şµÄÍ¼Æ¬ºÍÎÄ×ÖÑÕÉ« 
-        	mPager.setCurrentItem(2);
-            newsImage.setImageResource(R.drawable.news_selected);  
+            newsImage.setImageResource(R.drawable.message_selected);  
             newsText.setTextColor(Color.WHITE);              
             break;  
+        case 1:  
+            // å½“ç‚¹å‡»äº†è”ç³»äººtabæ—¶ï¼Œæ”¹å˜æ§ä»¶çš„å›¾ç‰‡å’Œæ–‡å­—é¢œè‰²
+        	mPager.setCurrentItem(1);
+            showImage.setImageResource(R.drawable.contacts_selected);  
+            showText.setTextColor(Color.WHITE);              
+            break;  
+        case 2:  
+            // å½“ç‚¹å‡»äº†åŠ¨æ€tabæ—¶ï¼Œæ”¹å˜æ§ä»¶çš„å›¾ç‰‡å’Œæ–‡å­—é¢œè‰² 
+        	mPager.setCurrentItem(2);
+            dateImage.setImageResource(R.drawable.news_selected);  
+            dateText.setTextColor(Color.WHITE);              
+            break;  
         case 3:  
-        default:  
-            // µ±µã»÷ÁËÉèÖÃtabÊ±£¬¸Ä±ä¿Ø¼şµÄÍ¼Æ¬ºÍÎÄ×ÖÑÕÉ«  
+            // å½“ç‚¹å‡»äº†åŠ¨æ€tabæ—¶ï¼Œæ”¹å˜æ§ä»¶çš„å›¾ç‰‡å’Œæ–‡å­—é¢œè‰² 
         	mPager.setCurrentItem(3);
+            mineImage.setImageResource(R.drawable.contacts_selected);  
+            mineText.setTextColor(Color.WHITE);              
+            break;  
+        case 4:  
+        default:  
+            // å½“ç‚¹å‡»äº†è®¾ç½®tabæ—¶ï¼Œæ”¹å˜æ§ä»¶çš„å›¾ç‰‡å’Œæ–‡å­—é¢œè‰²  
+        	mPager.setCurrentItem(4);
             settingImage.setImageResource(R.drawable.setting_selected);  
             settingText.setTextColor(Color.WHITE);             
             break;  
@@ -152,29 +173,31 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
     }  
   
     /** 
-     * Çå³ıµôËùÓĞµÄÑ¡ÖĞ×´Ì¬¡£ 
+     * æ¸…é™¤æ‰æ‰€æœ‰çš„é€‰ä¸­çŠ¶æ€ã€‚ 
      */  
     private void clearSelection() {  
-        messageImage.setImageResource(R.drawable.message_unselected);  
-        messageText.setTextColor(Color.parseColor("#82858b"));  
-        contactsImage.setImageResource(R.drawable.contacts_unselected);  
-        contactsText.setTextColor(Color.parseColor("#82858b"));  
-        newsImage.setImageResource(R.drawable.news_unselected);  
+        newsImage.setImageResource(R.drawable.message_unselected);  
         newsText.setTextColor(Color.parseColor("#82858b"));  
+        showImage.setImageResource(R.drawable.contacts_unselected);  
+        showText.setTextColor(Color.parseColor("#82858b"));  
+        dateImage.setImageResource(R.drawable.news_unselected);  
+        dateText.setTextColor(Color.parseColor("#82858b"));  
+        mineImage.setImageResource(R.drawable.contacts_unselected);  
+        mineText.setTextColor(Color.parseColor("#82858b"));  
         settingImage.setImageResource(R.drawable.setting_unselected);  
         settingText.setTextColor(Color.parseColor("#82858b"));  
     }  
   
    	/**
-	 * ·µ»Ø°´Å¥µÄ¼àÌı£¬ÓÃÀ´Ñ¯ÎÊÓÃ»§ÊÇ·ñÍË³ö³ÌĞò
+	 * è¿”å›æŒ‰é’®çš„ç›‘å¬ï¼Œç”¨æ¥è¯¢é—®ç”¨æˆ·æ˜¯å¦é€€å‡ºç¨‹åº
 	 * */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (keyCode == KeyEvent.KEYCODE_BACK) {
 				Builder builder = new Builder(TabActivity.this);
-				builder.setTitle("ÌáÊ¾");
-				builder.setMessage("ÄãÈ·¶¨ÒªÍË³öÂğ£¿");
+				builder.setTitle("æç¤º");
+				builder.setMessage("ä½ ç¡®å®šè¦é€€å‡ºå—ï¼Ÿ");
 				builder.setIcon(R.drawable.zhwen);
 
 				DialogInterface.OnClickListener dialog = new DialogInterface.OnClickListener() {
@@ -187,8 +210,8 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
 						}
 					}
 				};
-				builder.setPositiveButton("È¡Ïû", dialog);
-				builder.setNegativeButton("È·¶¨", dialog);
+				builder.setPositiveButton("å–æ¶ˆ", dialog);
+				builder.setNegativeButton("ç¡®å®š", dialog);
 				AlertDialog alertDialog = builder.create();
 				alertDialog.show();
 			}
@@ -197,7 +220,7 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
 	}
 	
 	/**
-	 * Ò³¿¨ÇĞ»»¼àÌı
+	 * é¡µå¡åˆ‡æ¢ç›‘å¬
 	 */
 	public class MyOnPageChangeListener implements OnPageChangeListener {
 
@@ -206,23 +229,28 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
 			clearSelection();
 	        switch (arg0) {  
 	        case 0:  
-	            // µ±µã»÷ÁËÏûÏ¢tabÊ±£¬¸Ä±ä¿Ø¼şµÄÍ¼Æ¬ºÍÎÄ×ÖÑÕÉ«  
-	            messageImage.setImageResource(R.drawable.message_selected);  
-	            messageText.setTextColor(Color.WHITE);              
-	            break;  
-	        case 1:  
-	            // µ±µã»÷ÁËÁªÏµÈËtabÊ±£¬¸Ä±ä¿Ø¼şµÄÍ¼Æ¬ºÍÎÄ×ÖÑÕÉ«
-	            contactsImage.setImageResource(R.drawable.contacts_selected);  
-	            contactsText.setTextColor(Color.WHITE);              
-	            break;  
-	        case 2:  
-	            // µ±µã»÷ÁË¶¯Ì¬tabÊ±£¬¸Ä±ä¿Ø¼şµÄÍ¼Æ¬ºÍÎÄ×ÖÑÕÉ« 
-	            newsImage.setImageResource(R.drawable.news_selected);  
+	            // å½“ç‚¹å‡»äº†æ¶ˆæ¯tabæ—¶ï¼Œæ”¹å˜æ§ä»¶çš„å›¾ç‰‡å’Œæ–‡å­—é¢œè‰²  
+	            newsImage.setImageResource(R.drawable.message_selected);  
 	            newsText.setTextColor(Color.WHITE);              
 	            break;  
+	        case 1:  
+	            // å½“ç‚¹å‡»äº†è”ç³»äººtabæ—¶ï¼Œæ”¹å˜æ§ä»¶çš„å›¾ç‰‡å’Œæ–‡å­—é¢œè‰²
+	            showImage.setImageResource(R.drawable.contacts_selected);  
+	            showText.setTextColor(Color.WHITE);              
+	            break;  
+	        case 2:  
+	            // å½“ç‚¹å‡»äº†åŠ¨æ€tabæ—¶ï¼Œæ”¹å˜æ§ä»¶çš„å›¾ç‰‡å’Œæ–‡å­—é¢œè‰² 
+	            dateImage.setImageResource(R.drawable.news_selected);  
+	            dateText.setTextColor(Color.WHITE);              
+	            break;  
 	        case 3:  
+	            // å½“ç‚¹å‡»äº†åŠ¨æ€tabæ—¶ï¼Œæ”¹å˜æ§ä»¶çš„å›¾ç‰‡å’Œæ–‡å­—é¢œè‰² 
+	            mineImage.setImageResource(R.drawable.news_selected);  
+	            mineText.setTextColor(Color.WHITE);              
+	            break;  
+	        case 4:  
 	        default:  
-	            // µ±µã»÷ÁËÉèÖÃtabÊ±£¬¸Ä±ä¿Ø¼şµÄÍ¼Æ¬ºÍÎÄ×ÖÑÕÉ«  
+	            // å½“ç‚¹å‡»äº†è®¾ç½®tabæ—¶ï¼Œæ”¹å˜æ§ä»¶çš„å›¾ç‰‡å’Œæ–‡å­—é¢œè‰²  
 	            settingImage.setImageResource(R.drawable.setting_selected);  
 	            settingText.setTextColor(Color.WHITE);             
 	            break;  

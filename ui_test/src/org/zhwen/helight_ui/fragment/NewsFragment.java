@@ -20,8 +20,8 @@ public class NewsFragment extends Fragment {
         View newsLayout = inflater.inflate(R.layout.news_layout, container, false);  
         WebView webView = (WebView) newsLayout.findViewById(R.id.news_web);
      
-        webView.getSettings().setJavaScriptEnabled(true);//ÉèÖÃÊ¹ÓÃ¹»Ö´ĞĞJS½Å±¾
-		webView.getSettings().setBuiltInZoomControls(true);//ÉèÖÃÊ¹Ö§³ÖËõ·Å
+        webView.getSettings().setJavaScriptEnabled(true);//è®¾ç½®ä½¿ç”¨å¤Ÿæ‰§è¡ŒJSè„šæœ¬
+		webView.getSettings().setBuiltInZoomControls(true);//è®¾ç½®ä½¿æ”¯æŒç¼©æ”¾
 //		webView.getSettings().setDefaultFontSize(5);
 		
 		String url = "http://zhwen.org";
@@ -30,10 +30,10 @@ public class NewsFragment extends Fragment {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
 				// TODO Auto-generated method stub
-				view.loadUrl(url);// Ê¹ÓÃµ±Ç°WebView´¦ÀíÌø×ª
-				return true;//true±íÊ¾´ËÊÂ¼şÔÚ´Ë´¦±»´¦Àí£¬²»ĞèÒªÔÙ¹ã²¥
+				view.loadUrl(url);// ä½¿ç”¨å½“å‰WebViewå¤„ç†è·³è½¬
+				return true;//trueè¡¨ç¤ºæ­¤äº‹ä»¶åœ¨æ­¤å¤„è¢«å¤„ç†ï¼Œä¸éœ€è¦å†å¹¿æ’­
 			}
-			@Override	//×ªÏò´íÎóÊ±µÄ´¦Àí
+			@Override	//è½¬å‘é”™è¯¯æ—¶çš„å¤„ç†
 			public void onReceivedError(WebView view, int errorCode,
 					String description, String failingUrl) {
 				// TODO Auto-generated method stub
