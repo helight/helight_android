@@ -20,8 +20,8 @@ public class NewsFragment extends Fragment {
         View newsLayout = inflater.inflate(R.layout.news_layout, container, false);  
         WebView webView = (WebView) newsLayout.findViewById(R.id.news_web);
      
-        webView.getSettings().setJavaScriptEnabled(true);//设置使用够执行JS脚本
-		webView.getSettings().setBuiltInZoomControls(true);//设置使支持缩放
+//        webView.getSettings().setJavaScriptEnabled(true);//设置使用够执行JS脚本
+//		webView.getSettings().setBuiltInZoomControls(true);//设置使支持缩放
 //		webView.getSettings().setDefaultFontSize(5);
 		
 		String url = "http://zhwen.org";
