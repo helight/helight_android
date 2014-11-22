@@ -2,8 +2,6 @@ package org.zhwen.bannerview;
 
 import java.util.ArrayList;
 
-import org.zhwen.bannerview.utility.NewsXmlParser;
-
 import android.app.Activity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,20 +12,20 @@ import android.widget.Toast;
 import android.widget.ImageView.ScaleType;
 
 /**
- * Éú³É»¬¶¯Í¼Æ¬ÇøÓò²¼¾Ö
- * @Description: Éú³É»¬¶¯Í¼Æ¬ÇøÓò²¼¾Ö
+ * ç”Ÿæˆæ»‘åŠ¨å›¾ç‰‡åŒºåŸŸå¸ƒå±€
+ * @Description: ç”Ÿæˆæ»‘åŠ¨å›¾ç‰‡åŒºåŸŸå¸ƒå±€
  * @File: SlideImageLayout.java
  * @Version V1.0
  */
 public class SlideImageLayout {
-	// °üº¬Í¼Æ¬µÄArrayList
+	// åŒ…å«å›¾ç‰‡çš„ArrayList
 	private ArrayList<ImageView> imageList = null;
 	private Activity activity = null;
-	// Ô²µãÍ¼Æ¬¼¯ºÏ
+	// åœ†ç‚¹å›¾ç‰‡é›†åˆ
 	private ImageView[] imageViews = null; 
 	private ImageView imageView = null;
 	private NewsXmlParser parser = null;
-	// ±íÊ¾µ±Ç°»¬¶¯Í¼Æ¬µÄË÷Òı
+	// è¡¨ç¤ºå½“å‰æ»‘åŠ¨å›¾ç‰‡çš„ç´¢å¼•
 	private int pageIndex = 0;
 	
 	public SlideImageLayout(Activity activity) {
@@ -38,12 +36,12 @@ public class SlideImageLayout {
 	}
 	
 	/**
-	 * Éú³É»¬¶¯Í¼Æ¬ÇøÓò²¼¾Ö
+	 * ç”Ÿæˆæ»‘åŠ¨å›¾ç‰‡åŒºåŸŸå¸ƒå±€
 	 * @param index
 	 * @return
 	 */
 	public View getSlideImageLayout(int index){
-		// °üº¬TextViewµÄLinearLayout
+		// åŒ…å«TextViewçš„LinearLayout
 		LinearLayout imageLinerLayout = new LinearLayout(activity);
 		LinearLayout.LayoutParams imageLinerLayoutParames = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.WRAP_CONTENT, 
@@ -60,7 +58,7 @@ public class SlideImageLayout {
 	}
 	
 	/**
-	 * »ñÈ¡LinearLayout
+	 * è·å–LinearLayout
 	 * @param view
 	 * @param width
 	 * @param height
@@ -72,7 +70,7 @@ public class SlideImageLayout {
 				width, 
 				height,
 				1);
-		// ÕâÀï×îºÃÒ²×Ô¶¨ÒåÉèÖÃ£¬ÓĞĞËÈ¤µÄ×Ô¼ºÉèÖÃ¡£
+		// è¿™é‡Œæœ€å¥½ä¹Ÿè‡ªå®šä¹‰è®¾ç½®ï¼Œæœ‰å…´è¶£çš„è‡ªå·±è®¾ç½®ã€‚
 		linerLayout.setPadding(10, 0, 10, 0);
 		linerLayout.addView(view, linerLayoutParames);
 		
@@ -80,7 +78,7 @@ public class SlideImageLayout {
 	}
 	
 	/**
-	 * ÉèÖÃÔ²µã¸öÊı
+	 * è®¾ç½®åœ†ç‚¹ä¸ªæ•°
 	 * @param size
 	 */
 	public void setCircleImageLayout(int size){
@@ -88,7 +86,7 @@ public class SlideImageLayout {
 	}
 	
 	/**
-	 * Éú³ÉÔ²µãÍ¼Æ¬ÇøÓò²¼¾Ö¶ÔÏó
+	 * ç”Ÿæˆåœ†ç‚¹å›¾ç‰‡åŒºåŸŸå¸ƒå±€å¯¹è±¡
 	 * @param index
 	 * @return
 	 */
@@ -100,7 +98,7 @@ public class SlideImageLayout {
         imageViews[index] = imageView;
          
         if (index == 0) {  
-            //Ä¬ÈÏÑ¡ÖĞµÚÒ»ÕÅÍ¼Æ¬
+            //é»˜è®¤é€‰ä¸­ç¬¬ä¸€å¼ å›¾ç‰‡
             imageViews[index].setBackgroundResource(R.drawable.dot_selected);  
         } else {  
             imageViews[index].setBackgroundResource(R.drawable.dot_none);  
@@ -110,14 +108,14 @@ public class SlideImageLayout {
 	}
 	
 	/**
-	 * ÉèÖÃµ±Ç°»¬¶¯Í¼Æ¬µÄË÷Òı
+	 * è®¾ç½®å½“å‰æ»‘åŠ¨å›¾ç‰‡çš„ç´¢å¼•
 	 * @param index
 	 */
 	public void setPageIndex(int index){
 		pageIndex = index;
 	}
 	
-	// »¬¶¯Ò³Ãæµã»÷ÊÂ¼ş¼àÌıÆ÷
+	// æ»‘åŠ¨é¡µé¢ç‚¹å‡»äº‹ä»¶ç›‘å¬å™¨
     private class ImageOnClickListener implements OnClickListener{
     	@Override
     	public void onClick(View v) {
