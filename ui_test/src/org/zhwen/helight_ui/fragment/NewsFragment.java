@@ -42,5 +42,28 @@ public class NewsFragment extends Fragment {
 		});
         return newsLayout;  
     }  
-  
+  /*
+   myHomePagerView = (InfiniteViewPager) (home_activity_head.findViewById(R.id.productGallery));
+			myHomePagerView.setContainerView(mListView);
+			LayoutParams params = myHomePagerView.getLayoutParams();
+			myHomePagerView.setLayoutParams(params);
+			// 推荐轮播图
+			myHomePagerView.setOnPageChangeListener(new OnPageChangeListener() {
+				public void onPageSelected(int position) {
+					int pointIndex = position % galleryList.size();
+					setImg2Point(pointIndex);
+				}
+
+				public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+				}
+
+				public void onPageScrollStateChanged(int position) {
+				}
+			});
+			
+			
+
+	homePagerAdapter = new HomeGalleryPagerAdapter(getContext(), galleryList);
+					myHomePagerView.setAdapter(homePagerAdapter);
+   * */
 }  

@@ -1,4 +1,4 @@
-package org.zhwen.helight_ui;
+package org.zhwen.helight_ui.xlistview;
 
 import android.content.Context;
 import android.os.Handler;
@@ -33,7 +33,7 @@ public class InfiniteViewPager extends ViewPager {
 	// 开启自动轮播
 	public void startAutoShow() {
 		handler.removeCallbacks(taskAutoShow);
-		handler.postDelayed(taskAutoShow, 4000);
+		handler.postDelayed(taskAutoShow, 3000);
 	}
 
 	Handler handler = new Handler();
@@ -47,7 +47,6 @@ public class InfiniteViewPager extends ViewPager {
 			if (currentImgIndex >= getAdapter().getCount())
 				currentImgIndex = 0;
 			setCurrentItem(currentImgIndex);
-
 			startAutoShow();
 		}
 	};

@@ -6,138 +6,114 @@ import java.util.List;
 import java.util.Map;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.zhwen.helight_ui.utiliys.NewsXmlParser;
-import org.zhwen.helight_ui.utiliys.SlideImageLayout;
 import org.zhwen.helight_ui.R;
+import org.zhwen.helight_ui.xlistview.InfiniteViewPager;
+import org.zhwen.helight_ui.xlistview.BannerViewAdapter;
+import org.zhwen.helight_ui.xlistview.XListView;
+import org.zhwen.helight_ui.xlistview.XListView.IXListViewListener;
 
-public class ShowFragment extends Fragment {  
-	
-	private int pageIndex = 0; 	// 当前ViewPager索引
-	private ArrayList<View> imagePageViews = null;// 滑动图片的集合
+public class ShowFragment extends Fragment implements IXListViewListener{  
+
 	private ViewGroup main_view = null;
-	private ViewPager viewPager = null;	
-	private ViewGroup imageCircleView = null;		// 包含圆点图片的View
-	private ImageView[] imageCircleViews = null; 	
-	private TextView tvSlideTitle = null;			// 滑动标题
-	private SlideImageLayout slideLayout = null;	// 布局设置类
-	private NewsXmlParser parser = null; 			// 数据解析类
+	private ViewGroup imageCircleView = null;		// 包含圆点图片的View		
 	
-	private ListView list_view;
-	private List<Map<String, Object>> mData;
-	
+    private Handler mHandler;
+    private XListView showListView;
+	private ArrayAdapter<String> mpAdapter;
+	private ArrayList<String> items = new ArrayList<String>();
+
+    private int[] Resources=new int[]{R.drawable.image01,R.drawable.image02,R.drawable.image03,R.drawable.image04};  
+    //存放View的ArrayList  
+    private ArrayList<View> Views;  
+    //点的状态图片资源  
+    private int[] PointState=new int[]{R.drawable.page, R.drawable.page_now};  
+    //提示切换的Point  
+    private ImageView[] Points;  
+    //ViewPager  
+    // private ViewPager mPager;   
+    private InfiniteViewPager mViewPager;
+    //ViewAdapter适配器  
+    private BannerViewAdapter mAdapter;  
+    private List<Map<String, Object>> mData;
+    //当前索引  
+    private int index;  
+    
     @Override  
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {  
     	main_view = (ViewGroup)inflater.inflate(R.layout.show_layout, container, false);  
-        initeViews();
         
-        list_view = (ListView) main_view.findViewById(R.id.minelistView);  
+        showListView = (XListView) main_view.findViewById(R.id.showListView);
+		showListView.setPullLoadEnable(true);
+		mpAdapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item, items);
+		showListView.setAdapter(mpAdapter);
+		showListView.setXListViewListener(this);
+		mHandler = new Handler();        
+		
+        //初始化View  
+        Views = new ArrayList<View>();  
+        for(int i=0;i<Resources.length;i++)  
+        {  
+            ImageView Image = new ImageView(getActivity());  
+            Image.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT ,LayoutParams.MATCH_PARENT));             
+            // Image.setAdjustViewBounds(true);
+            // Image.setMaxHeight(110);
+            // int padding = getActivity().getResources().getDimensionPixelSize(R.dimen.padding_medium);
+            // Image.setPadding(padding, padding, padding, padding);
+            // Image.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            Image.setImageResource(Resources[i]);  
+            Views.add(Image);  
+        }  
+
+        LayoutInflater mInflater = getActivity().getLayoutInflater();
+		LinearLayout banner_head = (LinearLayout) mInflater.inflate(R.layout.banner_head, null);
+	    //初始化Points  
+        imageCircleView = (ViewGroup) banner_head.findViewById(R.id.LayoutForPoint);  
+        Points = new ImageView[Resources.length];  
+        for (int i = 0; i < Resources.length; i++) {  
+            ImageView imageView = new ImageView(getActivity());  
+            imageView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.MATCH_PARENT));             
+            Points[i] = imageView;  
+            imageView.setImageResource(PointState[0]);  
+            imageView.setPadding(10, 0, 10, 0);
+            imageCircleView.addView(imageView);  
+        } 
+        
+        //实例化适配器  
+        mAdapter = new BannerViewAdapter(getActivity(), Views);  
+        //获取ViewPaper    
+        mViewPager = (InfiniteViewPager)banner_head.findViewById(R.id.ViewPager);
+        mViewPager.setAdapter(mAdapter);  
+        mViewPager.setOnPageChangeListener(new ImagePageChangeListener());          
+        
+        //显示第一页  
+        index = 0;  
+        Points[index].setImageResource(PointState[1]);        
+       
+        showListView.addHeaderView(banner_head);// 增加广告banner  
+        
         mData = getData();
         MyAdapter adapter = new MyAdapter(getActivity());
-        list_view.setAdapter(adapter);
+        showListView.setAdapter(adapter);
+   
         return main_view;  
-    }  
-    /**
-	 * 初始化
-	 */
-	private void initeViews(){
-		// 滑动图片区域
-		imagePageViews = new ArrayList<View>();
-		viewPager = (ViewPager) main_view.findViewById(R.id.image_slide_page);  
-		
-		// 圆点图片区域
-		parser = new NewsXmlParser();
-		int length = parser.getSlideImages().length;
-		imageCircleViews = new ImageView[length];
-		imageCircleView = (ViewGroup) main_view.findViewById(R.id.layout_circle_images);
-		slideLayout = new SlideImageLayout(getActivity());
-		slideLayout.setCircleImageLayout(length);
-		
-		for(int i = 0;i < length;i++){
-			imagePageViews.add(slideLayout.getSlideImageLayout(parser.getSlideImages()[i]));
-			imageCircleViews[i] = slideLayout.getCircleImageLayout(i);
-			imageCircleView.addView(slideLayout.getLinearLayout(imageCircleViews[i], 10, 10));
-		}
-		
-		// 设置默认的滑动标题
-		tvSlideTitle = (TextView) main_view.findViewById(R.id.tvSlideTitle);
-		tvSlideTitle.setText(parser.getSlideTitles()[0]);
-		
-		// setContentView(main);
-		
-		// 设置ViewPager
-        viewPager.setAdapter(new SlideImageAdapter());  
-        viewPager.setOnPageChangeListener(new ImagePageChangeListener());
-	}
-	
-	// 滑动图片数据适配器
-    private class SlideImageAdapter extends PagerAdapter {  
-        @Override  
-        public int getCount() { 
-            return imagePageViews.size();  
-        }  
-  
-        @Override  
-        public boolean isViewFromObject(View arg0, Object arg1) {  
-            return arg0 == arg1;  
-        }  
-  
-        @Override  
-        public int getItemPosition(Object object) {  
-            // TODO Auto-generated method stub  
-            return super.getItemPosition(object);  
-        }  
-  
-        @Override  
-        public void destroyItem(View arg0, int arg1, Object arg2) {  
-            // TODO Auto-generated method stub  
-            ((ViewPager) arg0).removeView(imagePageViews.get(arg1));  
-        }  
-  
-        @Override  
-        public Object instantiateItem(View arg0, int arg1) {  
-            // TODO Auto-generated method stub  
-        	((ViewPager) arg0).addView(imagePageViews.get(arg1));
-            
-            return imagePageViews.get(arg1);  
-        }  
-  
-        @Override  
-        public void restoreState(Parcelable arg0, ClassLoader arg1) {  
-            // TODO Auto-generated method stub    
-        }  
-  
-        @Override  
-        public Parcelable saveState() {  
-            // TODO Auto-generated method stub  
-            return null;  
-        }  
-  
-        @Override  
-        public void startUpdate(View arg0) {  
-            // TODO Auto-generated method stub    
-        }  
-  
-        @Override  
-        public void finishUpdate(View arg0) {  
-            // TODO Auto-generated method stub    
-        }  
-    }
+    } 
     
     // 滑动页面更改事件监听器
     private class ImagePageChangeListener implements OnPageChangeListener {
@@ -150,21 +126,25 @@ public class ShowFragment extends Fragment {
         public void onPageScrolled(int arg0, float arg1, int arg2) {  
             // TODO Auto-generated method stub    
         }  
-  
-        @Override  
-        public void onPageSelected(int index) {  
-        	pageIndex = index;
-        	slideLayout.setPageIndex(pageIndex);
-        	tvSlideTitle.setText(parser.getSlideTitles()[pageIndex]);
-        	
-            for (int i = 0; i < imageCircleViews.length; i++) {  
-            	imageCircleViews[pageIndex].setBackgroundResource(R.drawable.dot_selected);
-                
-                if (index != i) {  
-                	imageCircleViews[i].setBackgroundResource(R.drawable.dot_none);  
-                }  
-            }
+        public void onPageSelected(int position)  {  
+            setPoint(position); 
+            Log.v("onPageSelected", "index: "  + position);
         }  
+      
+        /* 
+         * 设置索引为position的Point 
+         */  
+        private void setPoint(int position)   
+        {  
+            if (position < 0 || position > Resources.length - 1 || index == position) {  
+                return;  
+            }  
+            for(int i = 0; i < Resources.length; i++) {  
+                Points[i].setImageResource(PointState[0]);;  
+            }  
+            Points[position].setImageResource(PointState[1]);;  
+            index = position;  
+        }        
     }
     
     private List<Map<String, Object>> getData() {
@@ -195,20 +175,6 @@ public class ShowFragment extends Fragment {
     protected void onListItemClick(ListView l, View v, int position, long id) {         
         Log.v("MyListView4-click", (String)mData.get(position).get("title"));
     }
-     
-	/**
-	 * listview中点击按键弹出对话框
-	 */
-	public void showInfo() {
-		/*new AlertDialog.Builder(this).setTitle("我的listview")
-				.setMessage("介绍...")
-				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-					}
-				}).show();*/
-		Log.v("showInfo", "test");
-	}
 
 	public final class ViewHolder {
 		public ImageView img;
@@ -245,7 +211,7 @@ public class ShowFragment extends Fragment {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-
+			final int pos = position;
 			ViewHolder holder = null;
 			if (convertView == null) {
 
@@ -268,12 +234,44 @@ public class ShowFragment extends Fragment {
 			holder.viewBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					// Log.v("test", v.getId());
-					showInfo();
+					Log.v("ShowFragment", "viewBtn press" + v.getId() + " pos: " + pos);
 				}
 			});
-
 			return convertView;
 		}
+	}
+
+	private void onLoad() {
+		showListView.stopRefresh();
+		showListView.stopLoadMore();
+		showListView.setRefreshTime("刚刚");
+	}
+	
+	@Override
+	public void onRefresh() {
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				// start = ++refreshCnt;
+				items.clear();
+				// geneItems();
+				// mAdapter.notifyDataSetChanged();
+				MyAdapter adapter = new MyAdapter(getActivity());
+				showListView.setAdapter(adapter);
+				onLoad();
+			}
+		}, 2000);
+	}
+
+	@Override
+	public void onLoadMore() {
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				/// geneItems();
+				mAdapter.notifyDataSetChanged();
+				onLoad();
+			}
+		}, 2000);
 	}
 }  
