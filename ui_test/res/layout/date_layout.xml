@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="北京"
+                android:text="深圳"
                 android:textColor="#FF8C00"
                 android:textSize="18sp" />
 
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="商户名 , 地点等..."
+                android:text="类别 , 地点等..."
                 android:textColor="#666666"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -83,9 +83,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="附近"
+                android:padding="5dp"
+                android:text="热门类型"
                 android:textSize="18sp" />
+
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -104,7 +105,7 @@
                         android:orientation="horizontal" >
 
                         <LinearLayout
-                            android:id="@+id/Search_food"
+                            android:id="@+id/LinearLayout01"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
@@ -113,78 +114,16 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/food" />
+                                android:src="@drawable/color_green" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="美食"
+                                android:text="篮球"
                                 android:textColor="#666666"
-                                android:textSize="12dp" />
+                                android:textSize="16dp" />
                         </LinearLayout>
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal" >
-
-                        <LinearLayout
-                            android:id="@+id/Search_outing"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:orientation="vertical" >
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/outing" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="景点"
-                                android:textColor="#666666"
-                                android:textSize="12dp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal" >
-
-                        <LinearLayout
-                            android:id="@+id/Search_hotel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:orientation="vertical" >
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/hotel" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="酒店"
-                                android:textColor="#666666"
-                                android:textSize="12dp" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp" >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -203,14 +142,14 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/pub" />
+                                android:src="@drawable/color_orange" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="酒吧"
+                                android:text="足球"
                                 android:textColor="#666666"
-                                android:textSize="12dp" />
+                                android:textSize="16dp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -231,14 +170,14 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/chinesesnack" />
+                                android:src="@drawable/color_purple" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="北京小吃"
+                                android:text="羽毛球"
                                 android:textColor="#666666"
-                                android:textSize="12dp" />
+                                android:textSize="16dp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -259,94 +198,169 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/more" />
+                                android:src="@drawable/color_red" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="更多分类"
+                                android:text="网球"
                                 android:textColor="#666666"
-                                android:textSize="12dp" />
+                                android:textSize="16dp" />
                         </LinearLayout>
                     </LinearLayout>
                 </TableRow>
             </TableLayout>
 
-            <LinearLayout
-                android:id="@+id/Search_list_huiyuanka"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/search_list_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="8dp"
-                android:paddingRight="10dp" >
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="9"
-                    android:orientation="vertical" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="会员卡"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="随时随地尊享会员特权"
-                        android:textColor="#666666"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/Search_list_souquancheng"
+                android:padding="5dp"
+                android:text="活动达人"
+                android:textSize="18sp" />
+			<TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/search_list_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="8dp"
-                android:paddingRight="10dp" >
+                android:layout_height="wrap_content" >
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <TableRow
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="9"
-                    android:orientation="vertical" >
+                    android:layout_marginBottom="15dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="搜全城"
-                        android:textSize="18sp" />
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/LinearLayout05"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical" >
+      						<TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="篮球达人-吴明"
+                                android:textColor="#666666"
+                                android:textSize="12dp" />
+
+      						<TextView
+      						    android:layout_width="wrap_content"
+      						    android:layout_height="wrap_content"
+      						    android:text="发起80次篮球活动"
+      						    android:textColor="#bbb"
+      						    android:textSize="10dp" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/logo_kaixin" />
+
+                      
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="按商区查询，找遍城市每个角落"
-                        android:textColor="#666666"
-                        android:textSize="13sp" />
-                </LinearLayout>
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal" >
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow" />
-            </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/LinearLayout04"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical" >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="足球小天才"
+                                android:textColor="#666666"
+                                android:textSize="12dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="足球运动健将"
+                                android:textColor="#bbb"
+                                android:textSize="10dp" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/logo_mingdao" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal" >
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayout02"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical" >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="羽毛球达人大叔"
+                                android:textColor="#666666"
+                                android:textSize="12dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="打遍天下无敌手"
+                                android:textColor="#bbb"
+                                android:textSize="10dp" />
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/logo_netease" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal" >
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayout03"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical" >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="网球明日之星"
+                                android:textColor="#666666"
+                                android:textSize="12dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="擅长断球快速攻击"
+                                android:textColor="#bbb"
+                                android:textSize="10dp" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/logo_qq" />                            
+                        </LinearLayout>
+                    </LinearLayout>
+                </TableRow>
+            </TableLayout>
 
             <LinearLayout
                 android:id="@+id/Search_list_paihangbang"
@@ -375,45 +389,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="全城最佳，生活宝典"
-                        android:textColor="#666666"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/Search_list_youhuiquan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/search_list_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="8dp"
-                android:paddingRight="10dp" >
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="9"
-                    android:orientation="vertical" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="优惠券"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="免费使用，省钱法宝"
+                        android:text="全城最新活动。。。"
                         android:textColor="#666666"
                         android:textSize="13sp" />
                 </LinearLayout>
