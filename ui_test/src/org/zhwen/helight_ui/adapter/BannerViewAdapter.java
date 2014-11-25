@@ -1,4 +1,4 @@
-package org.zhwen.helight_ui.xlistview;
+package org.zhwen.helight_ui.adapter;
 
 import java.util.ArrayList;  
 
@@ -11,7 +11,7 @@ import android.view.View.OnClickListener;
   
   
 public class BannerViewAdapter extends PagerAdapter {    
-	Context context;
+	private Context context;
     private ArrayList<View> Views;//存放View的ArrayList  
     private int index = 0;
       

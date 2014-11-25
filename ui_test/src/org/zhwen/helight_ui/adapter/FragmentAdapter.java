@@ -1,10 +1,11 @@
-package org.zhwen.helight_ui;
+package org.zhwen.helight_ui.adapter;
 
 import java.util.ArrayList;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 
 public class FragmentAdapter extends FragmentPagerAdapter {
@@ -25,7 +26,8 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     //这个函数的作用是当切换到第arg0个页面的时候调用。
     @Override
     public Fragment getItem(int arg0) {
-        return this.fragmentArray.get(arg0);
+    	Log.v("TabActivity", "fragmentArray: " + this.fragmentArray.size() + " index: " + arg0);
+        return this.fragmentArray.get(arg0);        
     }
 
     @Override

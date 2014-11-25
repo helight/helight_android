@@ -3,11 +3,11 @@
     android:layout_width="match_parent"  
     android:layout_height="match_parent" >  
         
-    <org.zhwen.helight_ui.xlistview.XListView
+    <org.zhwen.helight_ui.view.XListView
         android:id="@+id/showListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:cacheColorHint="#00000000">
-    </org.zhwen.helight_ui.xlistview.XListView>
+    </org.zhwen.helight_ui.view.XListView>
     
 </RelativeLayout>  

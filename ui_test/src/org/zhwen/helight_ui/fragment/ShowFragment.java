@@ -1,13 +1,13 @@
 package org.zhwen.helight_ui.fragment;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.content.Context;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -15,55 +15,55 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
+
+
 
 import org.zhwen.helight_ui.R;
-import org.zhwen.helight_ui.xlistview.InfiniteViewPager;
-import org.zhwen.helight_ui.xlistview.BannerViewAdapter;
-import org.zhwen.helight_ui.xlistview.XListView;
-import org.zhwen.helight_ui.xlistview.XListView.IXListViewListener;
+import org.zhwen.helight_ui.ItemDetailActivity;
+import org.zhwen.helight_ui.adapter.BannerViewAdapter;
+import org.zhwen.helight_ui.adapter.ShowListViewAdapter;
+import org.zhwen.helight_ui.view.InfiniteViewPager;
+import org.zhwen.helight_ui.view.XListView;
+import org.zhwen.helight_ui.view.XListView.IXListViewListener;
+import org.zhwen.helight_ui.utiliys.DataParser;
 
-public class ShowFragment extends Fragment implements IXListViewListener{  
 
+public class ShowFragment extends Fragment implements OnItemClickListener, IXListViewListener{  
+	public static final String TAG = "ShowFragment";  
 	private ViewGroup main_view = null;
 	private ViewGroup imageCircleView = null;		// 包含圆点图片的View		
 	
     private Handler mHandler;
     private XListView showListView;
-	private ArrayAdapter<String> mpAdapter;
-	private ArrayList<String> items = new ArrayList<String>();
+	private ShowListViewAdapter mlistAdapter;
 
     private int[] Resources=new int[]{R.drawable.image01,R.drawable.image02,R.drawable.image03,R.drawable.image04};  
-    //存放View的ArrayList  
-    private ArrayList<View> Views;  
-    //点的状态图片资源  
-    private int[] PointState=new int[]{R.drawable.page, R.drawable.page_now};  
-    //提示切换的Point  
-    private ImageView[] Points;  
-    //ViewPager  
-    // private ViewPager mPager;   
-    private InfiniteViewPager mViewPager;
-    //ViewAdapter适配器  
-    private BannerViewAdapter mAdapter;  
-    private List<Map<String, Object>> mData;
+    private ArrayList<View> Views;  //存放View的ArrayList  
+  
+    private int[] PointState=new int[]{R.drawable.page, R.drawable.page_now};    //点的状态图片资源  
+    private ImageView[] Points;      //提示切换的Point   
+    
+    private InfiniteViewPager mViewPager; //ViewPager      
+    private BannerViewAdapter mAdapter;  //ViewAdapter适配器  
+    private List<Map<String, Object>> mData = new ArrayList<Map<String, Object>>();
+    private DataParser data_pase = new DataParser();
     //当前索引  
     private int index;  
     
     @Override  
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {  
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { 
+    	Log.d(TAG, "onCreateView"); 
     	main_view = (ViewGroup)inflater.inflate(R.layout.show_layout, container, false);  
         
         showListView = (XListView) main_view.findViewById(R.id.showListView);
 		showListView.setPullLoadEnable(true);
-		mpAdapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item, items);
-		showListView.setAdapter(mpAdapter);
+
 		showListView.setXListViewListener(this);
+		showListView.setOnItemClickListener(this);
 		mHandler = new Handler();        
 		
         //初始化View  
@@ -72,11 +72,6 @@ public class ShowFragment extends Fragment implements IXListViewListener{
         {  
             ImageView Image = new ImageView(getActivity());  
             Image.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT ,LayoutParams.MATCH_PARENT));             
-            // Image.setAdjustViewBounds(true);
-            // Image.setMaxHeight(110);
-            // int padding = getActivity().getResources().getDimensionPixelSize(R.dimen.padding_medium);
-            // Image.setPadding(padding, padding, padding, padding);
-            // Image.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             Image.setImageResource(Resources[i]);  
             Views.add(Image);  
         }  
@@ -100,7 +95,7 @@ public class ShowFragment extends Fragment implements IXListViewListener{
         //获取ViewPaper    
         mViewPager = (InfiniteViewPager)banner_head.findViewById(R.id.ViewPager);
         mViewPager.setAdapter(mAdapter);  
-        mViewPager.setOnPageChangeListener(new ImagePageChangeListener());          
+        mViewPager.setOnPageChangeListener(new ImagePageChangeListener());         
         
         //显示第一页  
         index = 0;  
@@ -108,13 +103,89 @@ public class ShowFragment extends Fragment implements IXListViewListener{
        
         showListView.addHeaderView(banner_head);// 增加广告banner  
         
-        mData = getData();
-        MyAdapter adapter = new MyAdapter(getActivity());
-        showListView.setAdapter(adapter);
+        data_pase.getData(mData);
+        mlistAdapter = new ShowListViewAdapter(getActivity(), mData);
+        showListView.setAdapter(mlistAdapter);
    
         return main_view;  
     } 
     
+    @Override  
+    public void onAttach(Activity activity) {  
+        super.onAttach(activity);  
+        Log.d(TAG, "onAttach");  
+    }  
+  
+    @Override  
+    public void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        Log.d(TAG, "onCreate");  
+    }  
+  
+    @Override  
+    public void onActivityCreated(Bundle savedInstanceState) {  
+        super.onActivityCreated(savedInstanceState);  
+        Log.d(TAG, "onActivityCreated");  
+    }  
+  
+    @Override  
+    public void onStart() {  
+        super.onStart();  
+        Log.d(TAG, "onStart");  
+        mViewPager.startAutoShow();
+        mViewPager.autoShow = true;
+    }  
+  
+    @Override  
+    public void onResume() {  
+        super.onResume();  
+        Log.d(TAG, "onResume");  
+    }  
+  
+    @Override  
+    public void onPause() {  
+        super.onPause();  
+        Log.d(TAG, "onPause");  
+    }  
+  
+    @Override  
+    public void onStop() {  
+        super.onStop();  
+        Log.d(TAG, "onStop");  
+        mViewPager.autoShow = false;
+    }  
+  
+    @Override  
+    public void onDestroyView() {  
+        super.onDestroyView();  
+        Log.d(TAG, "onDestroyView");  
+    }  
+  
+    @Override  
+    public void onDestroy() {  
+        super.onDestroy();  
+        Log.d(TAG, "onDestroy");  
+    }  
+  
+    @Override  
+    public void onDetach() {  
+        super.onDetach();  
+        Log.d(TAG, "onDetach");  
+    }  
+    @Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
+	{
+    	System.out.println("你点击的是第" + arg3 + "项");
+    	Log.v("XListView-onItemClick", "title " + (String)mData.get((int)arg3).get("title"));
+    	Log.v("XListView-onItemClick", "info " + (String)mData.get((int)arg3).get("info"));
+		Intent intent = new Intent(getActivity(), ItemDetailActivity.class);
+		// intent.putExtra("investitem", mInvestListItem);
+		// intent.putExtra("position", InvestListAdapter.myPosition);
+		// intent.putExtra("status", InvestListAdapter.myStats);
+		// intent.putExtra("codevo", paramObject);
+		startActivity(intent);
+	}
+
     // 滑动页面更改事件监听器
     private class ImagePageChangeListener implements OnPageChangeListener {
         @Override  
@@ -147,101 +218,8 @@ public class ShowFragment extends Fragment implements IXListViewListener{
         }        
     }
     
-    private List<Map<String, Object>> getData() {
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
- 
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("title", "天天开心");
-        map.put("info", "中国最大的SNS社交网站");
-        map.put("img", R.drawable.logo_kaixin);
-        list.add(map);
- 
-        map = new HashMap<String, Object>();
-        map.put("title", "QQ同学");
-        map.put("info", "中国浏览量最大的中文门户网站");
-        map.put("img", R.drawable.logo_qq);
-        list.add(map);
- 
-        map = new HashMap<String, Object>();
-        map.put("title", "明道");
-        map.put("info", "为中国企业开发的社会化协作平台");
-        map.put("img", R.drawable.logo_mingdao);
-        list.add(map);
-         
-        return list;
-    }
-      
-    // ListView 中某项被选中后的逻辑
-    protected void onListItemClick(ListView l, View v, int position, long id) {         
-        Log.v("MyListView4-click", (String)mData.get(position).get("title"));
-    }
-
-	public final class ViewHolder {
-		public ImageView img;
-		public TextView title;
-		public TextView info;
-		public Button viewBtn;
-	}
-
-	public class MyAdapter extends BaseAdapter {
-
-		private LayoutInflater mInflater;
-
-		public MyAdapter(Context context) {
-			this.mInflater = LayoutInflater.from(context);
-		}
-
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return mData.size();
-		}
-
-		@Override
-		public Object getItem(int arg0) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public long getItemId(int arg0) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			final int pos = position;
-			ViewHolder holder = null;
-			if (convertView == null) {
-
-				holder = new ViewHolder();
-				convertView = mInflater.inflate(R.layout.date_list, null);
-				holder.img = (ImageView) convertView.findViewById(R.id.img);
-				holder.title = (TextView) convertView.findViewById(R.id.title);
-				holder.info = (TextView) convertView.findViewById(R.id.info);
-				holder.viewBtn = (Button) convertView.findViewById(R.id.view_btn);
-				convertView.setTag(holder);
-
-			} else {
-				holder = (ViewHolder) convertView.getTag();
-			}
-
-			holder.img.setImageResource((Integer) mData.get(position).get("img"));
-			holder.title.setText((String) mData.get(position).get("title"));
-			holder.info.setText((String) mData.get(position).get("info"));
-
-			holder.viewBtn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Log.v("ShowFragment", "viewBtn press" + v.getId() + " pos: " + pos);
-				}
-			});
-			return convertView;
-		}
-	}
-
 	private void onLoad() {
+		mlistAdapter.notifyDataSetChanged();
 		showListView.stopRefresh();
 		showListView.stopLoadMore();
 		showListView.setRefreshTime("刚刚");
@@ -252,12 +230,7 @@ public class ShowFragment extends Fragment implements IXListViewListener{
 		mHandler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				// start = ++refreshCnt;
-				items.clear();
 				// geneItems();
-				// mAdapter.notifyDataSetChanged();
-				MyAdapter adapter = new MyAdapter(getActivity());
-				showListView.setAdapter(adapter);
 				onLoad();
 			}
 		}, 2000);
@@ -268,8 +241,7 @@ public class ShowFragment extends Fragment implements IXListViewListener{
 		mHandler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				/// geneItems();
-				mAdapter.notifyDataSetChanged();
+				// geneItems();				
 				onLoad();
 			}
 		}, 2000);

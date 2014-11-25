@@ -367,12 +367,12 @@
                 android:padding="5dp"
                 android:text="同城约球"
                 android:textSize="18sp" />
-    <org.zhwen.helight_ui.xlistview.XListView
-        android:id="@+id/cityDateListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:cacheColorHint="#00000000">
-    </org.zhwen.helight_ui.xlistview.XListView>
+		    <org.zhwen.helight_ui.view.XListView
+		        android:id="@+id/cityDateListView"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"
+		        android:cacheColorHint="#00000000">
+		    </org.zhwen.helight_ui.view.XListView>
         </LinearLayout>
     </ScrollView>
 

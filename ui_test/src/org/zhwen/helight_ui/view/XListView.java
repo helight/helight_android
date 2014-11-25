@@ -1,4 +1,4 @@
-package org.zhwen.helight_ui.xlistview;
+package org.zhwen.helight_ui.view;
 
 import java.text.DateFormat;
 import java.util.Date;

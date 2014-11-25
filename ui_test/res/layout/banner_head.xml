@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
      android:orientation="vertical" >
 
-    <org.zhwen.helight_ui.xlistview.InfiniteViewPager
+    <org.zhwen.helight_ui.view.InfiniteViewPager
         android:id="@+id/ViewPager"
         android:layout_width="match_parent"
         android:layout_height="125dip"

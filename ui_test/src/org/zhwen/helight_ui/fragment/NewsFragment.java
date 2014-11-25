@@ -1,7 +1,9 @@
 package org.zhwen.helight_ui.fragment;
 
 import android.support.v4.app.Fragment;
+import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +15,10 @@ import org.zhwen.helight_ui.R;
 
 
 public class NewsFragment extends Fragment {  
-  
+	public static final String TAG = "NewsFragment"; 
     @Override  
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,  
-            Bundle savedInstanceState) {  
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {  
+    	Log.d(TAG, "onCreateView"); 
         View newsLayout = inflater.inflate(R.layout.news_layout, container, false);  
         WebView webView = (WebView) newsLayout.findViewById(R.id.news_web);
      
@@ -42,28 +44,64 @@ public class NewsFragment extends Fragment {
 		});
         return newsLayout;  
     }  
-  /*
-   myHomePagerView = (InfiniteViewPager) (home_activity_head.findViewById(R.id.productGallery));
-			myHomePagerView.setContainerView(mListView);
-			LayoutParams params = myHomePagerView.getLayoutParams();
-			myHomePagerView.setLayoutParams(params);
-			// 推荐轮播图
-			myHomePagerView.setOnPageChangeListener(new OnPageChangeListener() {
-				public void onPageSelected(int position) {
-					int pointIndex = position % galleryList.size();
-					setImg2Point(pointIndex);
-				}
-
-				public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-				}
-
-				public void onPageScrollStateChanged(int position) {
-				}
-			});
-			
-			
-
-	homePagerAdapter = new HomeGalleryPagerAdapter(getContext(), galleryList);
-					myHomePagerView.setAdapter(homePagerAdapter);
-   * */
+  
+    @Override  
+    public void onAttach(Activity activity) {  
+        super.onAttach(activity);  
+        Log.d(TAG, "onAttach");  
+    }  
+  
+    @Override  
+    public void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        Log.d(TAG, "onCreate");  
+    }  
+  
+    @Override  
+    public void onActivityCreated(Bundle savedInstanceState) {  
+        super.onActivityCreated(savedInstanceState);  
+        Log.d(TAG, "onActivityCreated");  
+    }  
+  
+    @Override  
+    public void onStart() {  
+        super.onStart();  
+        Log.d(TAG, "onStart");  
+    }  
+  
+    @Override  
+    public void onResume() {  
+        super.onResume();  
+        Log.d(TAG, "onResume");  
+    }  
+  
+    @Override  
+    public void onPause() {  
+        super.onPause();  
+        Log.d(TAG, "onPause");  
+    }  
+  
+    @Override  
+    public void onStop() {  
+        super.onStop();  
+        Log.d(TAG, "onStop");  
+    }  
+  
+    @Override  
+    public void onDestroyView() {  
+        super.onDestroyView();  
+        Log.d(TAG, "onDestroyView");  
+    }  
+  
+    @Override  
+    public void onDestroy() {  
+        super.onDestroy();  
+        Log.d(TAG, "onDestroy");  
+    }  
+  
+    @Override  
+    public void onDetach() {  
+        super.onDetach();  
+        Log.d(TAG, "onDetach");  
+    }  
 }  

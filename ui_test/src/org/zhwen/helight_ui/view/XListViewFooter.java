@@ -1,4 +1,4 @@
-package org.zhwen.helight_ui.xlistview;
+package org.zhwen.helight_ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

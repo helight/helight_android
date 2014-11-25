@@ -1,14 +1,6 @@
 package org.zhwen.helight_ui;
 
-
-
 import java.util.ArrayList;
-
-import org.zhwen.helight_ui.fragment.DateFragment;
-import org.zhwen.helight_ui.fragment.MineFragment;
-import org.zhwen.helight_ui.fragment.NewsFragment;
-import org.zhwen.helight_ui.fragment.ShowFragment;
-import org.zhwen.helight_ui.fragment.SettingFragment;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -26,6 +18,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.graphics.Color;
 
+import org.zhwen.helight_ui.adapter.FragmentAdapter;
+import org.zhwen.helight_ui.fragment.DateFragment;
+import org.zhwen.helight_ui.fragment.MineFragment;
+import org.zhwen.helight_ui.fragment.NewsFragment;
+import org.zhwen.helight_ui.fragment.ShowFragment;
+import org.zhwen.helight_ui.fragment.SettingFragment;
 
 /** 
  * 项目的主Activity，所有的Fragment都嵌入在这里。 
@@ -35,24 +33,24 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
 
 	private ViewPager mPager;
 
-    private View newsLayout;    // 消息界面布局 
-    private View showLayout;   // 联系人界面布局 
+    private View newsLayout;       // 消息界面布局 
+    private View showLayout;       // 联系人界面布局 
     private View dateLayout;       // 动态界面布局 
     private View mineLayout;
     private View settingLayout;    // 设置界面布局 
   
     
-    private ImageView newsImage;  // 在Tab布局上显示消息图标的控件 
-    private ImageView showImage; // 在Tab布局上显示联系人图标的控件 
+    private ImageView newsImage;     // 在Tab布局上显示消息图标的控件 
+    private ImageView showImage;     // 在Tab布局上显示联系人图标的控件 
     private ImageView dateImage;     // 在Tab布局上显示动态图标的控件 
     private ImageView mineImage;
     private ImageView settingImage;  // 在Tab布局上显示设置图标的控件 
     
-    private TextView newsText;   // 在Tab布局上显示消息标题的控件 
-    private TextView showText;  // 在Tab布局上显示联系人标题的控件 
-    private TextView dateText;      // 在Tab布局上显示动态标题的控件 
+    private TextView newsText;       // 在Tab布局上显示消息标题的控件 
+    private TextView showText;       // 在Tab布局上显示联系人标题的控件 
+    private TextView dateText;       // 在Tab布局上显示动态标题的控件 
     private TextView mineText;
-    private TextView settingText;   // 在Tab布局上显示设置标题的控件 
+    private TextView settingText;    // 在Tab布局上显示设置标题的控件 
     
     private int tab_index = 0;
     
@@ -124,12 +122,29 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
         case R.id.setting_layout:               
         	tab_index = 4;// 当点击了设置tab时，选中第4个tab  
             break;  
-        default:  
+        default: 
+        	tab_index = 2;
             break;  
         }  
-        setTabSelection(tab_index);
-    }     
-  
+        setTabSelection(tab_index);        
+    }  
+    
+    /** 
+     * 清除掉所有的选中状态。 
+     */  
+    private void clearSelection() {  
+        newsImage.setImageResource(R.drawable.message_unselected);  
+        newsText.setTextColor(Color.parseColor("#82858b"));  
+        showImage.setImageResource(R.drawable.contacts_unselected);  
+        showText.setTextColor(Color.parseColor("#82858b"));  
+        dateImage.setImageResource(R.drawable.news_unselected);  
+        dateText.setTextColor(Color.parseColor("#82858b"));  
+        mineImage.setImageResource(R.drawable.contacts_unselected);  
+        mineText.setTextColor(Color.parseColor("#82858b"));  
+        settingImage.setImageResource(R.drawable.setting_unselected);  
+        settingText.setTextColor(Color.parseColor("#82858b"));  
+    }  
+	
     /** 
      * 根据传入的index参数来设置选中的tab页。 
      *  
@@ -172,22 +187,26 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
         }  
     }  
   
-    /** 
-     * 清除掉所有的选中状态。 
-     */  
-    private void clearSelection() {  
-        newsImage.setImageResource(R.drawable.message_unselected);  
-        newsText.setTextColor(Color.parseColor("#82858b"));  
-        showImage.setImageResource(R.drawable.contacts_unselected);  
-        showText.setTextColor(Color.parseColor("#82858b"));  
-        dateImage.setImageResource(R.drawable.news_unselected);  
-        dateText.setTextColor(Color.parseColor("#82858b"));  
-        mineImage.setImageResource(R.drawable.contacts_unselected);  
-        mineText.setTextColor(Color.parseColor("#82858b"));  
-        settingImage.setImageResource(R.drawable.setting_unselected);  
-        settingText.setTextColor(Color.parseColor("#82858b"));  
-    }  
-  
+
+	/**
+	 * 页卡切换监听
+	 */
+	public class MyOnPageChangeListener implements OnPageChangeListener {
+
+		@Override
+		public void onPageSelected(int arg0) {
+			setTabSelection(arg0);
+		}
+
+		@Override
+		public void onPageScrolled(int arg0, float arg1, int arg2) {
+		}
+
+		@Override
+		public void onPageScrollStateChanged(int arg0) {
+		}
+	}
+	
    	/**
 	 * 返回按钮的监听，用来询问用户是否退出程序
 	 * */
@@ -217,52 +236,5 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
 			}
 		}
 		return false;
-	}
-	
-	/**
-	 * 页卡切换监听
-	 */
-	public class MyOnPageChangeListener implements OnPageChangeListener {
-
-		@Override
-		public void onPageSelected(int arg0) {
-			clearSelection();
-	        switch (arg0) {  
-	        case 0:  
-	            // 当点击了消息tab时，改变控件的图片和文字颜色  
-	            newsImage.setImageResource(R.drawable.message_selected);  
-	            newsText.setTextColor(Color.WHITE);              
-	            break;  
-	        case 1:  
-	            // 当点击了联系人tab时，改变控件的图片和文字颜色
-	            showImage.setImageResource(R.drawable.contacts_selected);  
-	            showText.setTextColor(Color.WHITE);              
-	            break;  
-	        case 2:  
-	            // 当点击了动态tab时，改变控件的图片和文字颜色 
-	            dateImage.setImageResource(R.drawable.news_selected);  
-	            dateText.setTextColor(Color.WHITE);              
-	            break;  
-	        case 3:  
-	            // 当点击了动态tab时，改变控件的图片和文字颜色 
-	            mineImage.setImageResource(R.drawable.news_selected);  
-	            mineText.setTextColor(Color.WHITE);              
-	            break;  
-	        case 4:  
-	        default:  
-	            // 当点击了设置tab时，改变控件的图片和文字颜色  
-	            settingImage.setImageResource(R.drawable.setting_selected);  
-	            settingText.setTextColor(Color.WHITE);             
-	            break;  
-	        }  
-		}
-
-		@Override
-		public void onPageScrolled(int arg0, float arg1, int arg2) {
-		}
-
-		@Override
-		public void onPageScrollStateChanged(int arg0) {
-		}
 	}
 }  
