@@ -25,21 +25,21 @@ import android.widget.LinearLayout;
 import org.zhwen.helight_ui.R;
 import org.zhwen.helight_ui.ItemDetailActivity;
 import org.zhwen.helight_ui.adapter.BannerViewAdapter;
-import org.zhwen.helight_ui.adapter.ShowListViewAdapter;
+import org.zhwen.helight_ui.adapter.SecondListViewAdapter;
 import org.zhwen.helight_ui.view.InfiniteViewPager;
 import org.zhwen.helight_ui.view.XListView;
 import org.zhwen.helight_ui.view.XListView.IXListViewListener;
 import org.zhwen.helight_ui.utiliys.DataParser;
 
 
-public class ShowFragment extends Fragment implements OnItemClickListener, IXListViewListener{  
-	public static final String TAG = "ShowFragment";  
+public class SecondFragment extends Fragment implements OnItemClickListener, IXListViewListener{  
+	public static final String TAG = "Fragment2";  
 	private ViewGroup main_view = null;
 	private ViewGroup imageCircleView = null;		// 包含圆点图片的View		
 	
     private Handler mHandler;
     private XListView showListView;
-	private ShowListViewAdapter mlistAdapter;
+	private SecondListViewAdapter mlistAdapter;
 
     private int[] Resources=new int[]{R.drawable.image01,R.drawable.image02,R.drawable.image03,R.drawable.image04};  
     private ArrayList<View> Views;  //存放View的ArrayList  
@@ -57,7 +57,7 @@ public class ShowFragment extends Fragment implements OnItemClickListener, IXLis
     @Override  
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { 
     	Log.d(TAG, "onCreateView"); 
-    	main_view = (ViewGroup)inflater.inflate(R.layout.show_layout, container, false);  
+    	main_view = (ViewGroup)inflater.inflate(R.layout.layout2, container, false);  
         
         showListView = (XListView) main_view.findViewById(R.id.showListView);
 		showListView.setPullLoadEnable(true);
@@ -96,7 +96,8 @@ public class ShowFragment extends Fragment implements OnItemClickListener, IXLis
         mViewPager = (InfiniteViewPager)banner_head.findViewById(R.id.ViewPager);
         mViewPager.setAdapter(mAdapter);  
         mViewPager.setOnPageChangeListener(new ImagePageChangeListener());         
-        
+        mViewPager.startAutoShow();
+
         //显示第一页  
         index = 0;  
         Points[index].setImageResource(PointState[1]);        
@@ -104,74 +105,12 @@ public class ShowFragment extends Fragment implements OnItemClickListener, IXLis
         showListView.addHeaderView(banner_head);// 增加广告banner  
         
         data_pase.getData(mData);
-        mlistAdapter = new ShowListViewAdapter(getActivity(), mData);
+        mlistAdapter = new SecondListViewAdapter(getActivity(), mData);
         showListView.setAdapter(mlistAdapter);
    
         return main_view;  
     } 
-    
-    @Override  
-    public void onAttach(Activity activity) {  
-        super.onAttach(activity);  
-        Log.d(TAG, "onAttach");  
-    }  
-  
-    @Override  
-    public void onCreate(Bundle savedInstanceState) {  
-        super.onCreate(savedInstanceState);  
-        Log.d(TAG, "onCreate");  
-    }  
-  
-    @Override  
-    public void onActivityCreated(Bundle savedInstanceState) {  
-        super.onActivityCreated(savedInstanceState);  
-        Log.d(TAG, "onActivityCreated");  
-    }  
-  
-    @Override  
-    public void onStart() {  
-        super.onStart();  
-        Log.d(TAG, "onStart");  
-        mViewPager.startAutoShow();
-        mViewPager.autoShow = true;
-    }  
-  
-    @Override  
-    public void onResume() {  
-        super.onResume();  
-        Log.d(TAG, "onResume");  
-    }  
-  
-    @Override  
-    public void onPause() {  
-        super.onPause();  
-        Log.d(TAG, "onPause");  
-    }  
-  
-    @Override  
-    public void onStop() {  
-        super.onStop();  
-        Log.d(TAG, "onStop");  
-        mViewPager.autoShow = false;
-    }  
-  
-    @Override  
-    public void onDestroyView() {  
-        super.onDestroyView();  
-        Log.d(TAG, "onDestroyView");  
-    }  
-  
-    @Override  
-    public void onDestroy() {  
-        super.onDestroy();  
-        Log.d(TAG, "onDestroy");  
-    }  
-  
-    @Override  
-    public void onDetach() {  
-        super.onDetach();  
-        Log.d(TAG, "onDetach");  
-    }  
+
     @Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
 	{
@@ -179,8 +118,8 @@ public class ShowFragment extends Fragment implements OnItemClickListener, IXLis
     	Log.v("XListView-onItemClick", "title " + (String)mData.get((int)arg3).get("title"));
     	Log.v("XListView-onItemClick", "info " + (String)mData.get((int)arg3).get("info"));
 		Intent intent = new Intent(getActivity(), ItemDetailActivity.class);
-		// intent.putExtra("investitem", mInvestListItem);
-		// intent.putExtra("position", InvestListAdapter.myPosition);
+		intent.putExtra("title", (String)mData.get((int)arg3).get("title"));
+		intent.putExtra("info", (String)mData.get((int)arg3).get("info"));
 		// intent.putExtra("status", InvestListAdapter.myStats);
 		// intent.putExtra("codevo", paramObject);
 		startActivity(intent);
@@ -246,4 +185,65 @@ public class ShowFragment extends Fragment implements OnItemClickListener, IXLis
 			}
 		}, 2000);
 	}
+	
+    
+    @Override  
+    public void onAttach(Activity activity) {  
+        super.onAttach(activity);  
+        Log.d(TAG, "onAttach");  
+    }  
+  
+    @Override  
+    public void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        Log.d(TAG, "onCreate");  
+    }  
+  
+    @Override  
+    public void onActivityCreated(Bundle savedInstanceState) {  
+        super.onActivityCreated(savedInstanceState);  
+        Log.d(TAG, "onActivityCreated");  
+    }  
+  
+    @Override  
+    public void onStart() {  
+        super.onStart();  
+        Log.d(TAG, "onStart");  
+    }  
+  
+    @Override  
+    public void onResume() {  
+        super.onResume();  
+        Log.d(TAG, "onResume");  
+    }  
+  
+    @Override  
+    public void onPause() {  
+        super.onPause();  
+        Log.d(TAG, "onPause");  
+    }  
+  
+    @Override  
+    public void onStop() {  
+        super.onStop();  
+        Log.d(TAG, "onStop");  
+    }  
+  
+    @Override  
+    public void onDestroyView() {  
+        super.onDestroyView();  
+        Log.d(TAG, "onDestroyView");  
+    }  
+  
+    @Override  
+    public void onDestroy() {  
+        super.onDestroy();  
+        Log.d(TAG, "onDestroy");  
+    }  
+  
+    @Override  
+    public void onDetach() {  
+        super.onDetach();  
+        Log.d(TAG, "onDetach");  
+    }  
 }  

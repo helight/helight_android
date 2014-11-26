@@ -15,17 +15,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.zhwen.helight_ui.R;
-import org.zhwen.helight_ui.adapter.ShowListViewAdapter;
+import org.zhwen.helight_ui.adapter.SecondListViewAdapter;
 import org.zhwen.helight_ui.view.XListView;
 import org.zhwen.helight_ui.view.XListView.IXListViewListener;
 import org.zhwen.helight_ui.utiliys.DataParser;
 
 
-public class MineFragment extends Fragment implements IXListViewListener {  
-	public static final String TAG = "MineFragment";  
+public class ForthFragment extends Fragment implements IXListViewListener {  
+	public static final String TAG = "Fragment4";  
 	private XListView mineListView;	
 	private Handler mHandler;
-	private ShowListViewAdapter mAdapter;
+	private SecondListViewAdapter mAdapter;
 	
 	private DataParser data_pase = new DataParser();
 	private List<Map<String, Object>> list_item = new ArrayList<Map<String, Object>>();
@@ -33,13 +33,13 @@ public class MineFragment extends Fragment implements IXListViewListener {
 	@Override  
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {  
 		Log.d(TAG, "onCreateView"); 
-        View mineLayout = inflater.inflate(R.layout.mine_layout, container, false);  
+        View mineLayout = inflater.inflate(R.layout.layout4, container, false);  
         
         data_pase.getData(list_item);
 		mineListView = (XListView) mineLayout.findViewById(R.id.mineListView);
 		mineListView.setPullLoadEnable(true);
         
-        mAdapter = new ShowListViewAdapter(getActivity(), list_item);
+        mAdapter = new SecondListViewAdapter(getActivity(), list_item);
         mineListView.setAdapter(mAdapter);
         mineListView.setXListViewListener(this);
         mHandler = new Handler();

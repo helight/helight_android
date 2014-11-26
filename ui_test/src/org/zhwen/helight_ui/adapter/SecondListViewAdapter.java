@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ShowListViewAdapter extends BaseAdapter {
+public class SecondListViewAdapter extends BaseAdapter {
 	public final class ViewHolder {
 		public ImageView img;
 		public TextView title;
@@ -29,7 +29,7 @@ public class ShowListViewAdapter extends BaseAdapter {
 	private Context context;
 	private List<Map<String, Object>> mData;
 	
-	public ShowListViewAdapter(Context context, List<Map<String, Object>> data) {
+	public SecondListViewAdapter(Context context, List<Map<String, Object>> data) {
 		this.context = context;
 		this.mInflater = LayoutInflater.from(context);
 		this.mData = data;
@@ -79,6 +79,8 @@ public class ShowListViewAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				Log.v("ShowFragment", "viewBtn press" + v.getId() + " pos: " + pos);
 				Intent intent = new Intent(context, ItemDetailActivity.class);
+				intent.putExtra("title", (String)mData.get(pos).get("title"));
+				intent.putExtra("info", (String)mData.get(pos).get("info"));
 				// intent.putExtra("investitem", mInvestListItem);
 				// intent.putExtra("position", InvestListAdapter.myPosition);
 				// intent.putExtra("status", InvestListAdapter.myStats);

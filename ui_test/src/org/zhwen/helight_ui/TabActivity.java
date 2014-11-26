@@ -19,11 +19,11 @@ import android.widget.TextView;
 import android.graphics.Color;
 
 import org.zhwen.helight_ui.adapter.FragmentAdapter;
-import org.zhwen.helight_ui.fragment.DateFragment;
-import org.zhwen.helight_ui.fragment.MineFragment;
-import org.zhwen.helight_ui.fragment.NewsFragment;
-import org.zhwen.helight_ui.fragment.ShowFragment;
-import org.zhwen.helight_ui.fragment.SettingFragment;
+import org.zhwen.helight_ui.fragment.ThirdFragment;
+import org.zhwen.helight_ui.fragment.ForthFragment;
+import org.zhwen.helight_ui.fragment.FristFragment;
+import org.zhwen.helight_ui.fragment.SecondFragment;
+import org.zhwen.helight_ui.fragment.FifthFragment;
 
 /** 
  * 项目的主Activity，所有的Fragment都嵌入在这里。 
@@ -32,25 +32,24 @@ import org.zhwen.helight_ui.fragment.SettingFragment;
 public class TabActivity extends FragmentActivity implements OnClickListener {  
 
 	private ViewPager mPager;
-
-    private View newsLayout;       // 消息界面布局 
-    private View showLayout;       // 联系人界面布局 
-    private View dateLayout;       // 动态界面布局 
-    private View mineLayout;
-    private View settingLayout;    // 设置界面布局 
-  
-    
-    private ImageView newsImage;     // 在Tab布局上显示消息图标的控件 
-    private ImageView showImage;     // 在Tab布局上显示联系人图标的控件 
-    private ImageView dateImage;     // 在Tab布局上显示动态图标的控件 
-    private ImageView mineImage;
-    private ImageView settingImage;  // 在Tab布局上显示设置图标的控件 
-    
-    private TextView newsText;       // 在Tab布局上显示消息标题的控件 
-    private TextView showText;       // 在Tab布局上显示联系人标题的控件 
-    private TextView dateText;       // 在Tab布局上显示动态标题的控件 
-    private TextView mineText;
-    private TextView settingText;    // 在Tab布局上显示设置标题的控件 
+	// 界面布局 
+    private View Layout1; 
+    private View Layout2;    
+    private View Layout3;    
+    private View Layout4;
+    private View Layout5;   
+    // 图标的控件 
+    private ImageView Image1;    
+    private ImageView Image2;
+    private ImageView Image3;
+    private ImageView Image4;
+    private ImageView Image5;
+    // 消息标题的控件
+    private TextView Text1;
+    private TextView Text2;
+    private TextView Text3;
+    private TextView Text4;
+    private TextView Text5; 
     
     private int tab_index = 0;
     
@@ -62,13 +61,14 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
         mPager = (ViewPager) findViewById(R.id.viewpager);
 		
 		ArrayList<Fragment> fragmentArray = new ArrayList<Fragment>();
-		fragmentArray.add(new NewsFragment());
-		fragmentArray.add(new ShowFragment());
-		fragmentArray.add(new DateFragment());
-		fragmentArray.add(new MineFragment());
-		fragmentArray.add(new SettingFragment());
+		fragmentArray.add(new FristFragment());
+		fragmentArray.add(new SecondFragment());
+		fragmentArray.add(new ThirdFragment());
+		fragmentArray.add(new ForthFragment());
+		fragmentArray.add(new FifthFragment());
 		mPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), fragmentArray));		
-		mPager.setOnPageChangeListener(new MyOnPageChangeListener());		
+		mPager.setOnPageChangeListener(new MyOnPageChangeListener());	
+		mPager.setOffscreenPageLimit(4);
         
 		initViews();  // 初始化布局元素   
 		
@@ -79,47 +79,47 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
      * 在这里获取到每个需要用到的控件的实例，并给它们设置好必要的点击事件。 
      */  
     private void initViews() {  
-        newsLayout = findViewById(R.id.news_layout);  
-        showLayout = findViewById(R.id.show_layout);  
-        dateLayout = findViewById(R.id.date_layout);  
-        mineLayout = findViewById(R.id.mine_layout);
-        settingLayout = findViewById(R.id.setting_layout); 
+        Layout1 = findViewById(R.id.layout1);  
+        Layout2 = findViewById(R.id.layout2);  
+        Layout3 = findViewById(R.id.layout3);  
+        Layout4 = findViewById(R.id.layout4);
+        Layout5 = findViewById(R.id.layout5); 
         
-        newsImage = (ImageView) findViewById(R.id.news_image);  
-        showImage = (ImageView) findViewById(R.id.show_image);  
-        dateImage = (ImageView) findViewById(R.id.date_image);  
-        mineImage = (ImageView) findViewById(R.id.mine_image);  
-        settingImage = (ImageView) findViewById(R.id.setting_image);  
+        Image1 = (ImageView) findViewById(R.id.image1);  
+        Image2 = (ImageView) findViewById(R.id.image2);  
+        Image3 = (ImageView) findViewById(R.id.image3);  
+        Image4 = (ImageView) findViewById(R.id.image4);  
+        Image5 = (ImageView) findViewById(R.id.image5);  
         
-        newsText = (TextView) findViewById(R.id.news_text);  
-        showText = (TextView) findViewById(R.id.show_text);  
-        dateText = (TextView) findViewById(R.id.date_text);  
-        mineText = (TextView) findViewById(R.id.mine_text);  
-        settingText = (TextView) findViewById(R.id.setting_text);  
+        Text1 = (TextView) findViewById(R.id.text1);  
+        Text2 = (TextView) findViewById(R.id.text2);  
+        Text3 = (TextView) findViewById(R.id.text3);  
+        Text4 = (TextView) findViewById(R.id.text4);  
+        Text5 = (TextView) findViewById(R.id.text5);  
         
-        newsLayout.setOnClickListener(this);  
-        showLayout.setOnClickListener(this);  
-        dateLayout.setOnClickListener(this);  
-        mineLayout.setOnClickListener(this);  
-        settingLayout.setOnClickListener(this);  
+        Layout1.setOnClickListener(this);  
+        Layout2.setOnClickListener(this);  
+        Layout3.setOnClickListener(this);  
+        Layout4.setOnClickListener(this);  
+        Layout5.setOnClickListener(this);  
     }  
   
     @Override  
     public void onClick(View v) {  
         switch (v.getId()) {  
-        case R.id.news_layout:               
+        case R.id.layout1:               
         	tab_index = 0;// 当点击了消息tab时，选中第1个tab 
             break;  
-        case R.id.show_layout:                
+        case R.id.layout2:                
         	tab_index = 1;// 当点击了联系人tab时，选中第2个tab
             break;  
-        case R.id.date_layout:                
+        case R.id.layout3:                
         	tab_index = 2;// 当点击了联系人tab时，选中第2个tab
             break;  
-        case R.id.mine_layout:              
+        case R.id.layout4:              
         	tab_index = 3;// 当点击了动态tab时，选中第3个tab
             break;  
-        case R.id.setting_layout:               
+        case R.id.layout5:               
         	tab_index = 4;// 当点击了设置tab时，选中第4个tab  
             break;  
         default: 
@@ -133,16 +133,16 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
      * 清除掉所有的选中状态。 
      */  
     private void clearSelection() {  
-        newsImage.setImageResource(R.drawable.message_unselected);  
-        newsText.setTextColor(Color.parseColor("#82858b"));  
-        showImage.setImageResource(R.drawable.contacts_unselected);  
-        showText.setTextColor(Color.parseColor("#82858b"));  
-        dateImage.setImageResource(R.drawable.news_unselected);  
-        dateText.setTextColor(Color.parseColor("#82858b"));  
-        mineImage.setImageResource(R.drawable.contacts_unselected);  
-        mineText.setTextColor(Color.parseColor("#82858b"));  
-        settingImage.setImageResource(R.drawable.setting_unselected);  
-        settingText.setTextColor(Color.parseColor("#82858b"));  
+        Image1.setImageResource(R.drawable.image1_unselected);  
+        Text1.setTextColor(Color.parseColor("#82858b"));  
+        Image2.setImageResource(R.drawable.image2_unselected);  
+        Text2.setTextColor(Color.parseColor("#82858b"));  
+        Image3.setImageResource(R.drawable.image3_unselected);  
+        Text3.setTextColor(Color.parseColor("#82858b"));  
+        Image4.setImageResource(R.drawable.image4_unselected);  
+        Text4.setTextColor(Color.parseColor("#82858b"));  
+        Image5.setImageResource(R.drawable.image5_unselected);  
+        Text5.setTextColor(Color.parseColor("#82858b"));  
     }  
 	
     /** 
@@ -156,33 +156,33 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
         case 0:  
             // 当点击了消息tab时，改变控件的图片和文字颜色  
         	mPager.setCurrentItem(0);
-            newsImage.setImageResource(R.drawable.message_selected);  
-            newsText.setTextColor(Color.WHITE);              
+            Image1.setImageResource(R.drawable.image1_selected);  
+            Text1.setTextColor(Color.WHITE);              
             break;  
         case 1:  
             // 当点击了联系人tab时，改变控件的图片和文字颜色
         	mPager.setCurrentItem(1);
-            showImage.setImageResource(R.drawable.contacts_selected);  
-            showText.setTextColor(Color.WHITE);              
+            Image2.setImageResource(R.drawable.image2_selected);  
+            Text2.setTextColor(Color.WHITE);              
             break;  
         case 2:  
             // 当点击了动态tab时，改变控件的图片和文字颜色 
         	mPager.setCurrentItem(2);
-            dateImage.setImageResource(R.drawable.news_selected);  
-            dateText.setTextColor(Color.WHITE);              
+            Image3.setImageResource(R.drawable.image3_selected);  
+            Text3.setTextColor(Color.WHITE);              
             break;  
         case 3:  
             // 当点击了动态tab时，改变控件的图片和文字颜色 
         	mPager.setCurrentItem(3);
-            mineImage.setImageResource(R.drawable.contacts_selected);  
-            mineText.setTextColor(Color.WHITE);              
+            Image4.setImageResource(R.drawable.image4_selected);  
+            Text4.setTextColor(Color.WHITE);              
             break;  
         case 4:  
         default:  
             // 当点击了设置tab时，改变控件的图片和文字颜色  
         	mPager.setCurrentItem(4);
-            settingImage.setImageResource(R.drawable.setting_selected);  
-            settingText.setTextColor(Color.WHITE);             
+            Image5.setImageResource(R.drawable.image5_selected);  
+            Text5.setTextColor(Color.WHITE);             
             break;  
         }  
     }  

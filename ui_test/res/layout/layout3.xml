@@ -217,7 +217,7 @@
                 android:padding="5dp"
                 android:text="活动达人"
                 android:textSize="18sp" />
-			<TableLayout
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
@@ -239,19 +239,19 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:orientation="vertical" >
-      						<TextView
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="篮球达人-吴明"
                                 android:textColor="#666666"
                                 android:textSize="12dp" />
 
-      						<TextView
-      						    android:layout_width="wrap_content"
-      						    android:layout_height="wrap_content"
-      						    android:text="发起80次篮球活动"
-      						    android:textColor="#bbb"
-      						    android:textSize="10dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="发起80次篮球活动"
+                                android:textColor="#bbb"
+                                android:textSize="10dp" />
 
                             <ImageView
                                 android:layout_width="wrap_content"
@@ -367,12 +367,12 @@
                 android:padding="5dp"
                 android:text="同城约球"
                 android:textSize="18sp" />
-		    <org.zhwen.helight_ui.view.XListView
-		        android:id="@+id/cityDateListView"
-		        android:layout_width="match_parent"
-		        android:layout_height="match_parent"
-		        android:cacheColorHint="#00000000">
-		    </org.zhwen.helight_ui.view.XListView>
+            <org.zhwen.helight_ui.view.XListView
+                android:id="@+id/cityDateListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:cacheColorHint="#00000000">
+            </org.zhwen.helight_ui.view.XListView>
         </LinearLayout>
     </ScrollView>
 

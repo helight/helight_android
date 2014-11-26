@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MineListViewAdapter extends BaseAdapter {
+public class ForthListViewAdapter extends BaseAdapter {
 	public final class ViewHolder {
 		public ImageView img;
 		public TextView title;
@@ -29,7 +29,7 @@ public class MineListViewAdapter extends BaseAdapter {
 	private Context context;
 	private List<Map<String, Object>> mData;
 	
-	public MineListViewAdapter(Context context, List<Map<String, Object>> data) {
+	public ForthListViewAdapter(Context context, List<Map<String, Object>> data) {
 		this.context = context;
 		this.mInflater = LayoutInflater.from(context);
 		this.mData = data;

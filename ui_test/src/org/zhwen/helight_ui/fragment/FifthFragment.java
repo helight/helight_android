@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 
 import org.zhwen.helight_ui.R;
 
-public class SettingFragment extends Fragment {  
-	public static final String TAG = "SettingFragment"; 
+public class FifthFragment extends Fragment {  
+	public static final String TAG = "Fragment5"; 
     @Override  
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {  
     	Log.d(TAG, "onCreateView"); 
-        View settingLayout = inflater.inflate(R.layout.setting_layout,  
+        View settingLayout = inflater.inflate(R.layout.layout5,  
                 container, false);  
         return settingLayout;  
     }  
