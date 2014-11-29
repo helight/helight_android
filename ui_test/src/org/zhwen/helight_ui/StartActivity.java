@@ -19,11 +19,11 @@ public class StartActivity extends Activity {
         //         WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
 
         setContentView(R.layout.activity_start);
-        
+        // RadarActivity
         new Handler().postDelayed(new Runnable(){
             @Override
-            public void run(){
-                Intent intent = new Intent(StartActivity.this, TabActivity.class);
+            public void run(){ 
+                Intent intent = new Intent(StartActivity.this, RadarActivity.class);
         		startActivity(intent);
         		StartActivity.this.finish();
             }
