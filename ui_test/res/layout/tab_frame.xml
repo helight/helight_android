@@ -130,7 +130,7 @@
             </RelativeLayout>  
 
             
-            <RelativeLayout  
+            <!--  RelativeLayout  
                 android:id="@+id/layout5"  
                 android:layout_width="0dp"  
                 android:layout_height="match_parent"  
@@ -157,6 +157,6 @@
                         android:text="@string/lable5"  
                         android:textColor="#82858b" />  
                 </LinearLayout>  
-            </RelativeLayout>  
+            </RelativeLayout -->  
         </LinearLayout>  
     </LinearLayout>  

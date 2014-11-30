@@ -215,7 +215,7 @@ public class SearchDevicesView extends BaseView{
 				setSearching(false);
 				Intent intent = new Intent(mContext, TabActivity.class);
 				mContext.startActivity(intent);
-				// getActivity().finish();
+				// this.getActivity().finish();
 			}
 		}
 	}

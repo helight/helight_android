@@ -12,7 +12,7 @@ import org.zhwen.helight_ui.R;
 
 
 public class ThirdFragment extends Fragment {  
-	public static final String TAG = "Fragment3"; 
+	public static final String TAG = "ThirdFragment"; 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     	Log.d(TAG, "onCreateView"); 
         View dateLayout = inflater.inflate(R.layout.layout3, container, false);       

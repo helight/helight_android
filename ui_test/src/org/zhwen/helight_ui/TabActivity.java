@@ -37,19 +37,19 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
     private View Layout2;    
     private View Layout3;    
     private View Layout4;
-    private View Layout5;   
+//    private View Layout5;   
     // 图标的控件 
     private ImageView Image1;    
     private ImageView Image2;
     private ImageView Image3;
     private ImageView Image4;
-    private ImageView Image5;
+//    private ImageView Image5;
     // 消息标题的控件
     private TextView Text1;
     private TextView Text2;
     private TextView Text3;
     private TextView Text4;
-    private TextView Text5; 
+//    private TextView Text5; 
     
     private int tab_index = 0;
     
@@ -57,7 +57,7 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
         requestWindowFeature(Window.FEATURE_NO_TITLE);  
-        setContentView(R.layout.main_frame);  
+        setContentView(R.layout.tab_frame);  
         mPager = (ViewPager) findViewById(R.id.viewpager);
 		
 		ArrayList<Fragment> fragmentArray = new ArrayList<Fragment>();
@@ -65,14 +65,14 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
 		fragmentArray.add(new SecondFragment());
 		fragmentArray.add(new ThirdFragment());
 		fragmentArray.add(new ForthFragment());
-		fragmentArray.add(new FifthFragment());
+//		fragmentArray.add(new FifthFragment());
 		mPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), fragmentArray));		
 		mPager.setOnPageChangeListener(new MyOnPageChangeListener());	
-		mPager.setOffscreenPageLimit(4);
+		mPager.setOffscreenPageLimit(3);
         
 		initViews();  // 初始化布局元素   
 		
-		setTabSelection(2);
+		setTabSelection(1);
     }  
   
     /** 
@@ -83,25 +83,25 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
         Layout2 = findViewById(R.id.layout2);  
         Layout3 = findViewById(R.id.layout3);  
         Layout4 = findViewById(R.id.layout4);
-        Layout5 = findViewById(R.id.layout5); 
+//        Layout5 = findViewById(R.id.layout5); 
         
         Image1 = (ImageView) findViewById(R.id.image1);  
         Image2 = (ImageView) findViewById(R.id.image2);  
         Image3 = (ImageView) findViewById(R.id.image3);  
         Image4 = (ImageView) findViewById(R.id.image4);  
-        Image5 = (ImageView) findViewById(R.id.image5);  
+//        Image5 = (ImageView) findViewById(R.id.image5);  
         
         Text1 = (TextView) findViewById(R.id.text1);  
         Text2 = (TextView) findViewById(R.id.text2);  
         Text3 = (TextView) findViewById(R.id.text3);  
         Text4 = (TextView) findViewById(R.id.text4);  
-        Text5 = (TextView) findViewById(R.id.text5);  
+//        Text5 = (TextView) findViewById(R.id.text5);  
         
         Layout1.setOnClickListener(this);  
         Layout2.setOnClickListener(this);  
         Layout3.setOnClickListener(this);  
         Layout4.setOnClickListener(this);  
-        Layout5.setOnClickListener(this);  
+//        Layout5.setOnClickListener(this);  
     }  
   
     @Override  
@@ -119,11 +119,11 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
         case R.id.layout4:              
         	tab_index = 3;// 当点击了动态tab时，选中第3个tab
             break;  
-        case R.id.layout5:               
-        	tab_index = 4;// 当点击了设置tab时，选中第4个tab  
-            break;  
+//        case R.id.layout5:               
+//        	tab_index = 4;// 当点击了设置tab时，选中第4个tab  
+//            break;  
         default: 
-        	tab_index = 2;
+        	tab_index = 1;
             break;  
         }  
         setTabSelection(tab_index);        
@@ -141,8 +141,8 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
         Text3.setTextColor(Color.parseColor("#82858b"));  
         Image4.setImageResource(R.drawable.image4_unselected);  
         Text4.setTextColor(Color.parseColor("#82858b"));  
-        Image5.setImageResource(R.drawable.image5_unselected);  
-        Text5.setTextColor(Color.parseColor("#82858b"));  
+//        Image5.setImageResource(R.drawable.image5_unselected);  
+//        Text5.setTextColor(Color.parseColor("#82858b"));  
     }  
 	
     /** 
@@ -180,9 +180,9 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
         case 4:  
         default:  
             // 当点击了设置tab时，改变控件的图片和文字颜色  
-        	mPager.setCurrentItem(4);
-            Image5.setImageResource(R.drawable.image5_selected);  
-            Text5.setTextColor(Color.WHITE);             
+        	mPager.setCurrentItem(1);
+            Image1.setImageResource(R.drawable.image5_selected);  
+            Text1.setTextColor(Color.WHITE);             
             break;  
         }  
     }  

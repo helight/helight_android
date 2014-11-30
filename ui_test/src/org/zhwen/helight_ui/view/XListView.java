@@ -162,7 +162,7 @@ public class XListView extends ListView implements OnScrollListener {
 			resetHeaderHeight();
 			DateFormat ddf = DateFormat.getDateInstance(); 
 			Date date = new Date(); 
-			setRefreshTime(ddf.format(date));// 源代码中没有
+			setRefreshTime(ddf.format(date));
 		}
 	}
 
@@ -237,7 +237,6 @@ public class XListView extends ListView implements OnScrollListener {
 			}
 		}
 		mFooterView.setBottomMargin(height);
-
 		// setSelection(mTotalItemCount - 1); // scroll to bottom
 	}
 
@@ -388,5 +387,4 @@ public class XListView extends ListView implements OnScrollListener {
 	public XListViewHeader getHeaderView() {
 		return mHeaderView;
 	}
-
 }

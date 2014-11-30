@@ -1,6 +1,8 @@
 package org.zhwen.helight_ui.fragment;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,10 +24,12 @@ import android.widget.LinearLayout;
 
 
 
+
+
 import org.zhwen.helight_ui.R;
 import org.zhwen.helight_ui.ItemDetailActivity;
 import org.zhwen.helight_ui.adapter.BannerViewAdapter;
-import org.zhwen.helight_ui.adapter.SecondListViewAdapter;
+import org.zhwen.helight_ui.adapter.FristListViewAdapter;
 import org.zhwen.helight_ui.view.InfiniteViewPager;
 import org.zhwen.helight_ui.view.XListView;
 import org.zhwen.helight_ui.view.XListView.IXListViewListener;
@@ -33,13 +37,13 @@ import org.zhwen.helight_ui.utiliys.DataParser;
 
 
 public class SecondFragment extends Fragment implements OnItemClickListener, IXListViewListener{  
-	public static final String TAG = "Fragment2";  
+	public static final String TAG = "SecondFragment";  
 	private ViewGroup main_view = null;
 	private ViewGroup imageCircleView = null;		// 包含圆点图片的View		
 	
     private Handler mHandler;
     private XListView showListView;
-	private SecondListViewAdapter mlistAdapter;
+	private FristListViewAdapter mlistAdapter;
 
     private int[] Resources=new int[]{R.drawable.image01,R.drawable.image02,R.drawable.image03,R.drawable.image04};  
     private ArrayList<View> Views;  //存放View的ArrayList  
@@ -105,7 +109,7 @@ public class SecondFragment extends Fragment implements OnItemClickListener, IXL
         showListView.addHeaderView(banner_head);// 增加广告banner  
         
         data_pase.getData(mData);
-        mlistAdapter = new SecondListViewAdapter(getActivity(), mData);
+        mlistAdapter = new FristListViewAdapter(getActivity(), mData);
         showListView.setAdapter(mlistAdapter);
    
         return main_view;  
@@ -161,7 +165,11 @@ public class SecondFragment extends Fragment implements OnItemClickListener, IXL
 		mlistAdapter.notifyDataSetChanged();
 		showListView.stopRefresh();
 		showListView.stopLoadMore();
-		showListView.setRefreshTime("刚刚");
+
+		DateFormat ddf = DateFormat.getDateInstance(); 
+		Date date = new Date(); 
+		showListView.setRefreshTime(ddf.format(date));
+		// showListView.setRefreshTime("刚刚");
 	}
 	
 	@Override

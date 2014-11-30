@@ -1,90 +1,23 @@
 package org.zhwen.helight_ui.fragment;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.support.v4.app.Fragment;
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.zhwen.helight_ui.R;
-import org.zhwen.helight_ui.adapter.SecondListViewAdapter;
-import org.zhwen.helight_ui.view.XListView;
-import org.zhwen.helight_ui.view.XListView.IXListViewListener;
-import org.zhwen.helight_ui.utiliys.DataParser;
 
-
-public class ForthFragment extends Fragment implements IXListViewListener {  
-	public static final String TAG = "Fragment4";  
-	private XListView mineListView;	
-	private Handler mHandler;
-	private SecondListViewAdapter mAdapter;
-	
-	private DataParser data_pase = new DataParser();
-	private List<Map<String, Object>> list_item = new ArrayList<Map<String, Object>>();
-	
-	@Override  
+public class ForthFragment extends Fragment {  
+	public static final String TAG = "ForthFragment"; 
+    @Override  
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {  
-		Log.d(TAG, "onCreateView"); 
-        View mineLayout = inflater.inflate(R.layout.layout4, container, false);  
-        
-        data_pase.getData(list_item);
-		mineListView = (XListView) mineLayout.findViewById(R.id.mineListView);
-		mineListView.setPullLoadEnable(true);
-        
-        mAdapter = new SecondListViewAdapter(getActivity(), list_item);
-        mineListView.setAdapter(mAdapter);
-        mineListView.setXListViewListener(this);
-        mHandler = new Handler();
-        
-        return mineLayout;  
-    } 
-    
-    private void geneItems() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("title", "天天开心");
-		map.put("info", "中国最大的SNS社交...");
-		map.put("img", R.drawable.logo_kaixin);
-		list_item.add(map);
-	}
-     	
-	private void onLoad() {
-		mineListView.stopRefresh();
-		mineListView.stopLoadMore();
-		mineListView.setRefreshTime("刚刚");
-	}
-	
-	@Override
-	public void onRefresh() {
-		mHandler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				geneItems();
-				mAdapter.notifyDataSetChanged();
-				onLoad();
-			}
-		}, 2000);
-	}
-
-	@Override
-	public void onLoadMore() {
-		mHandler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				geneItems();
-				mAdapter.notifyDataSetChanged();
-				onLoad();
-			}
-		}, 2000);
-	}
-	
+    	Log.d(TAG, "onCreateView"); 
+        View settingLayout = inflater.inflate(R.layout.layout4, container, false);  
+        return settingLayout;  
+    }  
     @Override  
     public void onAttach(Activity activity) {  
         super.onAttach(activity);  
@@ -144,4 +77,4 @@ public class ForthFragment extends Fragment implements IXListViewListener {
         super.onDetach();  
         Log.d(TAG, "onDetach");  
     }  
-}
+} 

@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class SecondListViewAdapter extends BaseAdapter {
+public class FristListViewAdapter extends BaseAdapter {
 	public final class ViewHolder {
 		public ImageView img;
 		public TextView title;
@@ -29,7 +29,7 @@ public class SecondListViewAdapter extends BaseAdapter {
 	private Context context;
 	private List<Map<String, Object>> mData;
 	
-	public SecondListViewAdapter(Context context, List<Map<String, Object>> data) {
+	public FristListViewAdapter(Context context, List<Map<String, Object>> data) {
 		this.context = context;
 		this.mInflater = LayoutInflater.from(context);
 		this.mData = data;
@@ -57,7 +57,6 @@ public class SecondListViewAdapter extends BaseAdapter {
 		final int pos = position;
 		ViewHolder holder = null;
 		if (convertView == null) {
-
 			holder = new ViewHolder();
 			convertView = mInflater.inflate(R.layout.date_list, null);
 			holder.img = (ImageView) convertView.findViewById(R.id.img);
