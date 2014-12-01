@@ -28,7 +28,7 @@ import android.view.MotionEvent;
 import org.zhwen.helight_ui.R;
 import org.zhwen.helight_ui.TabActivity;
 
-public class SearchDevicesView extends BaseView{
+public class RadarView extends BaseView{
 	
 	public static final String TAG = "SearchDevicesView";
 
@@ -54,17 +54,17 @@ public class SearchDevicesView extends BaseView{
 		invalidate();
 	}
 
-	public SearchDevicesView(Context context) {
+	public RadarView(Context context) {
 		super(context);
 		initBitmap(context);
 	}
 	
-	public SearchDevicesView(Context context, AttributeSet attrs) {
+	public RadarView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		initBitmap(context);
 	}
 
-	public SearchDevicesView(Context context, AttributeSet attrs, int defStyle) {
+	public RadarView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		initBitmap(context);
 	}
@@ -215,7 +215,7 @@ public class SearchDevicesView extends BaseView{
 				setSearching(false);
 				Intent intent = new Intent(mContext, TabActivity.class);
 				mContext.startActivity(intent);
-				// this.getActivity().finish();
+				((Activity)mContext).finish();
 			}
 		}
 	}

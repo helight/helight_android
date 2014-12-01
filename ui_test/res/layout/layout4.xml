@@ -367,7 +367,7 @@
                         android:src="@drawable/mm_submenu" />       
                 </LinearLayout>  
 
-                 <Button 
+                 <!--  Button 
                      android:layout_width="fill_parent" 
                      android:layout_height="wrap_content"
                      android:layout_marginTop="14dp"
@@ -381,7 +381,7 @@
                      android:gravity="center"
                      android:background="@drawable/btn_style_red"
                      android:onClick="exit_settings"
-                     />               
+                     /-->               
             </LinearLayout>
     </ScrollView>
 </LinearLayout>

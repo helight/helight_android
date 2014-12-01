@@ -64,7 +64,6 @@ public class FristListViewAdapter extends BaseAdapter {
 			holder.info = (TextView) convertView.findViewById(R.id.info);
 			holder.viewBtn = (Button) convertView.findViewById(R.id.view_btn);
 			convertView.setTag(holder);
-
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}

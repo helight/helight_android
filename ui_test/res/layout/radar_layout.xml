@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-    <org.zhwen.helight_ui.view.SearchDevicesView
-        android:id="@+id/search_device_view"
+    <org.zhwen.helight_ui.view.RadarView
+        android:id="@+id/radar_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </org.zhwen.helight_ui.view.SearchDevicesView>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

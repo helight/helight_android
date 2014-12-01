@@ -14,10 +14,14 @@
     <string name="xlistview_footer_hint_normal">查看更多</string>
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
     
-    <string name="lable1">球讯</string>
-    <string name="lable2">球秀</string>
-    <string name="lable3">约球</string>
+    <string name="lable1">活动</string>
+    <string name="lable2">快讯</string>
+    <string name="lable3">我秀</string>
     <string name="lable4">我</string>
     <string name="lable5">设置</string>
+    
+    <string name="main_toptitle">热门类型</string>
+    <string name="main_peopletitle">活动达人</string>
+    <string name="main_hottitle">热门活动</string>
 
 </resources>
