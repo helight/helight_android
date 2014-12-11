@@ -35,9 +35,40 @@ public class FristFragment extends Fragment {
 			list.add(item);
 		}
 		listAdapter.setList(list);
+		setListViewHeightBasedOnChildren(listView);
+		
 		listAdapter.notifyDataSetChanged();
+		
         return dateLayout;  
     }  
+
+	public void setListViewHeightBasedOnChildren(ListView listView) {
+
+		HotListViewAdapter listAdapter = (HotListViewAdapter)listView.getAdapter();
+
+		if (listAdapter == null) {
+			return;
+		}
+
+		int totalHeight = 0;
+
+		for (int i = 0; i < listAdapter.getCount(); i++) {
+			View listItem = listAdapter.getView(i, null, listView);
+			listItem.measure(0, 0);
+			totalHeight += listItem.getMeasuredHeight();
+		}
+
+		ViewGroup.LayoutParams params = listView.getLayoutParams();
+
+		params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+
+		// params.height += 5;// if without this statement,the listview will be
+		// listView.getDividerHeight()获取子项间分隔符占用的高度
+		// params.height最后得到整个ListView完整显示需要的高度
+
+		listView.setLayoutParams(params);
+	}
+	
     @Override  
     public void onAttach(Activity activity) {  
         super.onAttach(activity);  

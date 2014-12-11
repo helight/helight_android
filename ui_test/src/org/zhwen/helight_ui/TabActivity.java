@@ -56,7 +56,7 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
     @Override  
     protected void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
-        requestWindowFeature(Window.FEATURE_NO_TITLE);  
+        // requestWindowFeature(Window.FEATURE_NO_TITLE);  
         setContentView(R.layout.tab_frame);  
         mPager = (ViewPager) findViewById(R.id.viewpager);
 		
@@ -72,7 +72,7 @@ public class TabActivity extends FragmentActivity implements OnClickListener {
         
 		initViews();  // 初始化布局元素   
 		
-		setTabSelection(1);
+		setTabSelection(0);
     }  
   
     /** 

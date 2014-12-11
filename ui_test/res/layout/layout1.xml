@@ -73,11 +73,11 @@
     <ScrollView
         android:id="@+id/MySearchScroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical" >
 
             <TextView
@@ -310,11 +310,8 @@
                <ListView
 		        android:id="@+id/hotlistView"
 		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content" >
+		        android:layout_height="match_parent" >
 		       </ListView>
         </LinearLayout>
     </ScrollView>
-
-
-
 </LinearLayout>
