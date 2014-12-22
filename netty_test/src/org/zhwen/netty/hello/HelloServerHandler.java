@@ -1,7 +1,7 @@
 package org.zhwen.netty.hello;
 
 import java.net.InetAddress;
-import java.util.logging.Logger;
+
 
 import org.zhwen.netty.hello.Hello.ReqestType;
 import org.zhwen.netty.hello.Hello.Request;
